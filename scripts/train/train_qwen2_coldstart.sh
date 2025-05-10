@@ -1,5 +1,5 @@
 #!/bin/bash
-# export PYTHONPATH="/mnt/cloud_disk/jinhongbo/TinyLLaVA-Video-R1:$PYTHONPATH"
+export PYTHONPATH="/mnt/cloud_disk/jinhongbo/TinyLLaVA-Video-R1:$PYTHONPATH"
 
 VIDEO_DATA_PATH="/mnt/cloud_disk/jinhongbo/TinyLLaVA-Video-R1/dataset/nextqa-coldstart-16.json"
 VIDEO_PATH="/mnt/cloud_disk/jinhongbo/TinyLLaVA-Video-R1/dataset"
