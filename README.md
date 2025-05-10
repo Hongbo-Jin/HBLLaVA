@@ -14,9 +14,6 @@
 
 ## 📰 News
 
-<div align="center">
-<img src="images/case.png" alt="framework" width="90%" height="auto">
-</div>
 
 ## 🛠️ Installation
 
@@ -68,10 +65,6 @@ dataset
 ### 2. Train
 
 #### 1. Cold Start
-
-**Option1**: You can directly download [TinyLLaVA-Video-ColdStart](https://huggingface.co/Zhang199/TinyLLaVA-Video-Coldstart_NextQA_16).
-
-**Option2**: You can train the model yourself: 
 
 Replace data paths and model paths with yours in `scripts/train/train_qwen2_coldstart.sh`
 
@@ -142,11 +135,7 @@ The performance of **TinyLLaVA-Video-R1** is significantly higher than TinyLLaVA
 
 ## <img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/256/3176/3176298.png"> Aha Moment 
 
-**TinyLLaVA-Video-R1** exhibits "aha moments" where it revisits and refines its initial reasoning. As shown in the image below, the model self-corrects by evaluating different options and improving its responses, which enhances accuracy and interpretability. This reflective behavior distinguishes it from traditional models, offering greater transparency in the reasoning process.
 
-<div align="center">
-<img src="images/aha_moment.jpg" alt="framework" width="90%" height="auto">
-</div>
 
 ## 📝 Citation
 
