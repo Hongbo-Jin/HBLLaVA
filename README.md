@@ -1,36 +1,18 @@
-<h2 align="center">TinyLLaVA-Video-R1
+<h2 align="center">HBLLaVA
 </a>
 
 <h5 align="center">
 <div align="center">
 
-[Xingjian Zhang](https://scholar.google.com/citations?user=H34fwioAAAAJ&hl=zh-CN)<sup>1*</sup>,
-[Siwei Wen](https://scholar.google.com/citations?user=kJRiUYwAAAAJ&hl=zh-CN)<sup>1,2*</sup>,
-[Wenjun Wu](https://iai.buaa.edu.cn/info/1013/1093.htm)<sup>1,2,3</sup>, 
-[Lei Huang](https://huangleibuaa.github.io/)<sup>1,2,3,✉</sup>
-
-<sup>1</sup>SKLCCSE, Institute of Artificial Intelligence, Beihang University, Beijing, China<br>
-<sup>2</sup>Beijing Advanced Innovation Center for Future Blockchain and Privacy Computing, Beihang University, <br>
-<sup>3</sup>Hangzhou International Innovation Institute, Beihang University, Hangzhou, China
 
 </div>
 
 <div align="center">
 
-[![arXiv](https://img.shields.io/badge/Arxiv-2504.09641-AD1C18.svg?logo=arXiv)](https://arxiv.org/abs/2504.09641)
-[![Huggingface](https://img.shields.io/badge/🤗-%20Open%20In%20HF-blue.svg)](https://huggingface.co/Zhang199/TinyLLaVA-Video-R1)
-[![GitHub issues](https://img.shields.io/github/issues/ZhangXJ199/TinyLLaVA-Video-R1?color=critical&label=Issues)](https://github.com/ZhangXJ199/TinyLLaVA-Video-R1)
-[![GitHub Stars](https://img.shields.io/github/stars/ZhangXJ199/TinyLLaVA-Video-R1?style=social)](https://github.com/ZhangXJ199/TinyLLaVA-Video-R1)
 
 </div>
 
 ## 📰 News
-
-- [2025-04] 🎉 Our arXiv paper [TinyLLaVA-Video-R1: Towards Smaller LMMs for Video Reasoning](https://arxiv.org/abs/2504.09641) is released!
-- [2025-04] 🔊 Our [TinyLLaVA-Video-R1](https://github.com/ZhangXJ199/TinyLLaVA-Video-R1) repository is released!
-
-## <img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/256/2435/2435606.png"> About
-**TinyLLaVA-Video-R1** is a small-scale video reasoning model built upon the fully open-source [TinyLLaVA-Video](https://github.com/ZhangXJ199/TinyLLaVA-Video) framework. Designed for researchers with limited computational resources, it leverages reinforcement learning to enhance reasoning abilities while maintaining a model size under 4B parameters. **TinyLLaVA-Video-R1** demonstrates improved video question-answering performance and reflective reasoning behaviors ("**aha moments**"). The model and training process are fully traceable, ensuring reproducibility and reliability. This repository provides the model, code, and experimental setups for easy replication.
 
 <div align="center">
 <img src="images/case.png" alt="framework" width="90%" height="auto">
@@ -40,14 +22,14 @@
 
 1. Clone this repository and navigate to the folder
 ```bash
-git clone https://github.com/ZhangXJ199/TinyLLaVA-Video-R1.git
-cd TinyLLaVA-Video-R1
+git clone https://github.com/Hongbo-Jin/HBLLaVA.git
+cd HBLLaVA
 ```
 
 2. Create a conda environment, activate it and install Packages
 ```Shell
-conda create -n tinyllava_video python=3.10 -y
-conda activate tinyllava_video
+conda create -n hbllava python=3.10 -y
+conda activate hbllava
 pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
 ```
@@ -67,7 +49,6 @@ pip install -e .
 
 ### Trained Model
 
-The model we provided after training: [TinyLLaVA-Video-R1](https://huggingface.co/Zhang199/TinyLLaVA-Video-R1)
 
 ### 1. Data Preparation
 We select multiple choice questions from the NextQA subset of [LLaVA-Video-178K](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K) as training data. To maintain manageable training time with limited computational resources, we only choose the subset of data with a duration of 0 to 30 seconds, which contains 5,496 samples. The training data can be downloaded from [here](https://huggingface.co/datasets/Zhang199/TinyLLaVA-Video-R1-training-data).
@@ -154,11 +135,8 @@ We currently provide evaluations on 4 benchmarks, including [Video-MME](https://
    ```
 
 ## 📊 Results
-The performance of **TinyLLaVA-Video-R1** on multiple benchmarks. "Option" indicates that the model only needs to answer with the selected choice, while "Reason" means the model must output both the answer and the reasoning process according to the format requirements. Here, MMVU is categorized as a video reasoning benchmark, the remaining benchmarks are designed for general-purpose video evaluation. The best results are indicated by boldface.
 
-<div align="center">
-<img src="images/result.jpg" alt="framework" width="75%" height="auto">
-</div>
+
 
 The performance of **TinyLLaVA-Video-R1** is significantly higher than TinyLLaVA-Video-ColdStart, especially in benchmarks that test reasoning abilities such as MMVU. Moreover, it outperforms TinyLLaVA-Video-SFT across all benchmarks, highlighting the effectiveness of the reinforcement learning approach employed.
 
@@ -174,20 +152,12 @@ The performance of **TinyLLaVA-Video-R1** is significantly higher than TinyLLaVA
 
 If you find our work interesting and helpful, please consider giving our repo a star. Additionally, if you would like to cite our work, please use the following format:
 ```bibtex
-@misc{zhang2025tinyllavavideor1smallerlmmsvideo,
-      title={TinyLLaVA-Video-R1: Towards Smaller LMMs for Video Reasoning}, 
-      author={Xingjian Zhang and Siwei Wen and Wenjun Wu and Lei Huang},
-      year={2025},
-      eprint={2504.09641},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2504.09641}, 
-}
+
 ```
 
 ## 📨 Contact
 
-If you have any questions or suggestions, please feel free to contact us at ``zhangxingjian@buaa.edu.cn``.
+If you have any questions or suggestions, please feel free to contact us at ``hongbo@hust.edu.cn``.
 
 ## ❤️ Community efforts
 * This repository is based on [TinyLLaVA-Video](https://github.com/ZhangXJ199/TinyLLaVA-Video) project.
