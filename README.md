@@ -1,4 +1,4 @@
-<h2 align="center">HongBoLLaVA
+<h2 align="center">HBLLaVA
 </a>
 
 <h5 align="center">
