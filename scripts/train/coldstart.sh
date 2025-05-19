@@ -3,9 +3,9 @@
 VIDEO_DATA_PATH="/data/vlm/zxj/data/Nextqa_reason/nextqa-coldstart-16.json"
 VIDEO_PATH="/data/vlm/zxj/data/Nextqa_reason"
 
-MODEL_PATH=/data/vlm/zxj/result/TinyLLaVA-Video-Group-16-512
-LLM_VERSION=/mnt/data/zxj/checkpoints/Qwen2.5-3B # llm path
-VT_VERSION=/mnt/data/zxj/checkpoints/siglip-so400m-patch14-384 #vision tower path
+MODEL_PATH=/mnt/cloud_disk/public_ckpts/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512
+LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-3B # llm path
+VT_VERSION=/mnt/cloud_disk/public_ckpts/siglip-so400m-patch14-384 #vision tower path
 CN_VERSION=groupresampler #connector type
 VT_VARIANT="${VT_VERSION##*/}"
 LLM_VARIANT="${LLM_VERSION##*/}"
@@ -39,7 +39,7 @@ deepspeed --include localhost:1,2 --master_port 29501 tinyllava/train/train_cold
     --tune_type_connector full \
     --group_by_modality_length False \
     --pretrained_model_path $MODEL_PATH \
-    --output_dir /mnt/data/zxj/result/reasoning/TinyLLaVA-Video-Coldstart-16 \
+    --output_dir /mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/HBLLaVA-Video-Coldstart-16 \
     --num_train_epochs 1 \
     --per_device_train_batch_size 1 \
     --per_device_eval_batch_size 1 \
@@ -60,4 +60,4 @@ deepspeed --include localhost:1,2 --master_port 29501 tinyllava/train/train_cold
     --lazy_preprocess True \
     --report_to tensorboard \
     --tokenizer_use_fast False \
-    --run_name TinyLLaVA-Video-Coldstart-16
+    --run_name HBLLaVA-Coldstart

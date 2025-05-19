@@ -57,14 +57,16 @@ def train():
 
     training_recipe = TrainingRecipeFactory(training_arguments.training_recipe)(training_arguments) 
     # model_args contain arguements for huggingface model .from_pretrained function
+    
     model_args = load_settings(model_arguments, data_arguments, training_arguments)
     model_args = training_recipe.add_args(model_args)
     
-    print(f'model args :{model_args}')
-    exit(0)
-    
-    model_config = TinyLlavaConfig()
+    model_config = HBLlavaConfig()
     model_config.load_from_config(model_arguments)
+
+    print(f'model config : {model_config}')
+    exit(0)
+
     model = TinyLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
     model = training_recipe(model)
 
