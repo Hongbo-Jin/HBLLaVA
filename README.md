@@ -5,15 +5,15 @@
 <div align="center">
 
 [Hongbo Jin](https://hongbo-jin.github.io/hongbo.github.io/)<sup>1*</sup>,
-[Tinghong Ye]()<sup>2*</sup>,
+[Tinghong Ye]()<sup>*</sup>,
 [Jin Wang]()<sup></sup>, 
+[Binye Liu]()<sup></sup>,
 [Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>1,✉</sup>
-[Tuocheng Zeng]()<sup>3,✉</sup>
+[Tuocheng Zeng]()<sup>2,✉</sup>
 
 
 <sup>1</sup>School of Computer Science, Peking University, Beijing, China<br>
-<sup>2</sup>School of Artificial Intelligence, Huazhong University of Science and Technology, <br>
-<sup>3</sup>Binjiang Research Institute, Zhejiang University, Hangzhou, China
+<sup>2</sup>Binjiang Research Institute, Zhejiang University, Hangzhou, China
 
 </div>
 
