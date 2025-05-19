@@ -4,7 +4,7 @@ import pathlib
 import tokenizers
 import transformers
 
-from hbllava.train.tinyllava_trainer import LLaVATrainer
+from hbllava.train.hbllava_trainer import LLaVATrainer
 from hbllava.training_recipe import TrainingRecipeFactory
 from hbllava.utils import *
 from hbllava.model import *
@@ -63,11 +63,12 @@ def train():
     model_config = HBLlavaConfig()
     model_config.load_from_config(model_arguments)
 
-    print(f'model config : {model_config}')
-    exit(0)
-
-    model = TinyLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
+    model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
     model = training_recipe(model)
+    
+    
+    print(f'model------------:{model}')
+    exit(0)
 
     model.config.use_cache = False
     model.config.image_aspect_ratio = data_arguments.image_aspect_ratio

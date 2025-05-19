@@ -8,7 +8,7 @@
 [Tinghong Ye]()<sup>*</sup>,
 [Jin Wang]()<sup></sup>, 
 [Yaochen Liu]()<sup></sup>,
-[Binye Liu]()<sup></sup>,
+[Binye Liu](https://github.com/Xjtulby)<sup></sup>,
 [Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>1,✉</sup>
 [Tuocheng Zeng]()<sup>2,✉</sup>
 
