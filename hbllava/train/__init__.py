@@ -1,2 +1,2 @@
 from .train import *
-from .tinyllava_trainer import *
+from .hbllava_trainer import *
