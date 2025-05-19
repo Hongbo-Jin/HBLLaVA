@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyllava"
+version = "1.0.0"
+description = "A Framework of Small-scale Large Multimodal Models."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "torch==2.5.1", "torchvision==0.20.1", "tiktoken", "openpyxl", "tensorboardX",
+    "transformers==4.49.0", "tokenizers==0.21.0", "sentencepiece==0.2.0", "shortuuid", "accelerate==1.4.0", 
+    "bitsandbytes", "peft", "pydantic", "markdown2[all]", "numpy", "scikit-learn",
+    "gradio", "gradio_client", "requests", "httpx", "uvicorn", "fastapi",
+    "einops", "einops-exts", "timm", "deepspeed==0.15.3", "ninja", "wandb",
+    "pytorchvideo", "fastparquet", "av", "decord", "trl==0.14.0", "math-verify"
+]
+
+[project.optional-dependencies]
+train = ["deepspeed==0.15.3", "ninja", "wandb"]
+
+[project.urls]
+"Homepage" = "https://github.com/ZhangXJ199/TinyLLaVA-Video-R1"
+"Bug Tracker" = "https://github.com/ZhangXJ199/TinyLLaVA-Video-R1/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
+
+[tool.wheel]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
+
