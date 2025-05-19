@@ -11,7 +11,7 @@ from transformers.modeling_outputs import CausalLMOutputWithPast
 from transformers.generation.utils import GenerateOutput
 
 from . import LLMFactory, ConnectorFactory, VisionTowerFactory
-from .configuration_tinyllava import TinyLlavaConfig
+from .configuration_hbllava import HBLlavaConfig
 from ..utils.constants import *
 
 def get_value_from_kwargs(kwargs, name):
@@ -20,8 +20,8 @@ def get_value_from_kwargs(kwargs, name):
     else:
         return None
 
-class TinyLlavaPreTrainedModel(PreTrainedModel):
-    config_class = TinyLlavaConfig
+class HBLlavaPreTrainedModel(PreTrainedModel):
+    config_class = HBLlavaConfig
     base_model_prefix = "model"
     supports_gradient_checkpointing = True
     _no_split_modules = ["LlavaVisionAttention"]
@@ -52,8 +52,8 @@ class TinyLlavaPreTrainedModel(PreTrainedModel):
         return self.language_model._supports_sdpa
 
 
-class TinyLlavaForConditionalGeneration(TinyLlavaPreTrainedModel):
-    def __init__(self, config: TinyLlavaConfig):
+class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
+    def __init__(self, config: HBLlavaConfig):
         
         super().__init__(config)
 

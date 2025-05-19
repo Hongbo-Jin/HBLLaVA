@@ -1,7 +1,7 @@
 from transformers import PretrainedConfig, LlavaConfig
 from transformers import CONFIG_MAPPING
 from transformers import AutoConfig
-from tinyllava.utils.constants import *
+from hbllava.utils.constants import *
 
 class HBLlavaConfig(PretrainedConfig):
 

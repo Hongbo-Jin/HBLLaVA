@@ -18,8 +18,8 @@ from trl.data_utils import is_conversational
 from trl.models import prepare_deepspeed, unwrap_model_for_generation
 from trl.trainer.grpo_config import GRPOConfig
 
-from tinyllava.utils import *
-from tinyllava.model import *
+from hbllava.utils import *
+from hbllava.model import *
 
 from pytorchvideo.data.encoded_video import EncodedVideo
 import numpy as np

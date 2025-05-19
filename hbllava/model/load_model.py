@@ -3,8 +3,8 @@ import torch
 from collections import OrderedDict
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, BitsAndBytesConfig
 
-from .modeling_tinyllava import TinyLlavaForConditionalGeneration
-from .configuration_tinyllava import TinyLlavaConfig
+from .modeling_hbllava import HBLlavaForConditionalGeneration
+from .configuration_hbllava import HBLlavaConfig
  
 def load_base_ckp_for_lora(ckp_path):
     ckp = torch.load(ckp_path, map_location=torch.device('cpu'))

@@ -26,4 +26,4 @@ def register_vision_tower(name):
 
 # automatically import any Python files in the models/ directory
 models_dir = os.path.dirname(__file__)
-import_modules(models_dir, "tinyllava.model.vision_tower")
+import_modules(models_dir, "hbllava.model.vision_tower")

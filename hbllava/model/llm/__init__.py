@@ -25,4 +25,4 @@ def register_llm(name):
 
 # automatically import any Python files in the models/ directory
 models_dir = os.path.dirname(__file__)
-import_modules(models_dir, "tinyllava.model.llm")
+import_modules(models_dir, "hbllava.model.llm")
