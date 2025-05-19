@@ -53,6 +53,9 @@ def train():
         (ModelArguments, DataArguments, TrainingArguments))
     model_arguments, data_arguments, training_arguments = parser.parse_args_into_dataclasses()
     
+    print('parser loaded')
+    exit(0)
+    
     logger_setting(getattr(training_arguments, 'output_dir', None))
 
     training_recipe = TrainingRecipeFactory(training_arguments.training_recipe)(training_arguments) 

@@ -43,7 +43,7 @@ pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
 ```
 
-3. Install additional packages
+3. Install additional packages (Find your corresponding architecture at this [link](https://github.com/Dao-AILab/flash-attention/releases))
 ```Shell
 pip install flash-attn==2.7.3 --no-build-isolation
 ```
