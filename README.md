@@ -27,6 +27,7 @@
 **HBLLaVA** is a universal 3D reasoning model built upon the fully open-source [TinyLLaVA-Video](https://github.com/ZhangXJ199/TinyLLaVA-Video) framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
 The model and training process are fully traceable, ensuring reproducibility and reliability. This repository provides the model, code, and experimental setups for easy replication.
 
+![Peking University HBLLaVA](https://i.postimg.cc/wMYTVkRS/aha-moment.png)
 
 ## 🛠️ Installation
 
