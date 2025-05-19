@@ -4,12 +4,11 @@ import pathlib
 import tokenizers
 import transformers
 
-
-from tinyllava.train.tinyllava_trainer import LLaVATrainer
-from tinyllava.training_recipe import TrainingRecipeFactory
-from tinyllava.utils import *
-from tinyllava.model import *
-from tinyllava.data.dataset_coldstart import make_supervised_data_module
+from hbllava.train.tinyllava_trainer import LLaVATrainer
+from hbllava.training_recipe import TrainingRecipeFactory
+from hbllava.utils import *
+from hbllava.model import *
+from hbllava.data.dataset_coldstart import make_supervised_data_module
 
 IS_TOKENIZER_GREATER_THAN_0_14 = version.parse(tokenizers.__version__) >= version.parse('0.14')
 

@@ -7,11 +7,11 @@ import tokenizers
 import transformers
 from datasets import Dataset, DatasetDict
 
-from tinyllava.train.tinyllava_trainer_reason import LLaVATrainer_Reason
-from tinyllava.training_recipe import TrainingRecipeFactory
-from tinyllava.utils import *
-from tinyllava.model import *
-from tinyllava.data import *
+from hbllava.train.tinyllava_trainer_reason import LLaVATrainer_Reason
+from hbllava.training_recipe import TrainingRecipeFactory
+from hbllava.utils import *
+from hbllava.model import *
+from hbllava.data import *
 
 
 IS_TOKENIZER_GREATER_THAN_0_14 = version.parse(tokenizers.__version__) >= version.parse('0.14')

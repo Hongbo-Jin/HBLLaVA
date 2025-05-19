@@ -16,7 +16,7 @@ MODEL_MAX_LENGTH=3072
 NUM_FRAME=16
 NUM_QUERY=512
 
-deepspeed --include localhost:1,2 --master_port 29501 tinyllava/train/train_coldstart.py \
+deepspeed --include localhost:1,2 --master_port 29501 hbllava/train/train_coldstart.py \
     --deepspeed ./scripts/zero3.json \
     --video_data_path  $VIDEO_DATA_PATH \
     --video_folder $VIDEO_PATH \
