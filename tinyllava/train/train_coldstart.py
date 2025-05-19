@@ -53,15 +53,16 @@ def train():
         (ModelArguments, DataArguments, TrainingArguments))
     model_arguments, data_arguments, training_arguments = parser.parse_args_into_dataclasses()
     
-    print('parser loaded')
-    exit(0)
-    
     logger_setting(getattr(training_arguments, 'output_dir', None))
 
     training_recipe = TrainingRecipeFactory(training_arguments.training_recipe)(training_arguments) 
     # model_args contain arguements for huggingface model .from_pretrained function
     model_args = load_settings(model_arguments, data_arguments, training_arguments)
     model_args = training_recipe.add_args(model_args)
+    
+    print(f'model args :{model_args}')
+    exit(0)
+    
     model_config = TinyLlavaConfig()
     model_config.load_from_config(model_arguments)
     model = TinyLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
