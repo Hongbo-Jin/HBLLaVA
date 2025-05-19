@@ -25,8 +25,8 @@ dependencies = [
 train = ["deepspeed==0.15.3", "ninja", "wandb"]
 
 [project.urls]
-"Homepage" = "https://github.com/ZhangXJ199/TinyLLaVA-Video-R1"
-"Bug Tracker" = "https://github.com/ZhangXJ199/TinyLLaVA-Video-R1/issues"
+"Homepage" = "https://github.com/Hongbo-Jin/HBLLaVA"
+"Bug Tracker" = "https://github.com/Hongbo-Jin/HBLLaVA/issues"
 
 [tool.setuptools.packages.find]
 exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
