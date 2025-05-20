@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VIDEO_DATA_PATH="/data/vlm/zxj/data/Nextqa_reason/nextqa-coldstart-16.json"
-VIDEO_PATH="/data/vlm/zxj/data/Nextqa_reason"
+VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/Nextqa/nextqa-coldstart-16.json"
+VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/snapshots/NExTQA/video"
 
 MODEL_PATH=/mnt/cloud_disk/public_ckpts/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512
 LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-3B # llm path

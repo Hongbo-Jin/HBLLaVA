@@ -66,21 +66,23 @@ def train():
     model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
     model = training_recipe(model)
     
-    
-    print(f'model------------:{model}')
-    exit(0)
-
     model.config.use_cache = False
     model.config.image_aspect_ratio = data_arguments.image_aspect_ratio
     tokenizer = model.tokenizer
     data_arguments.image_processor = model.vision_tower._image_processor
     data_arguments.is_multimodal = True
     log_trainable_params(model)  # not work well with zero3
-        
+    
     data_arguments.data_path = data_arguments.video_data_path
     data_arguments.data_folder = data_arguments.video_folder
+    
     video_data_module = make_supervised_data_module(tokenizer=tokenizer,
                                                     data_args=data_arguments)
+    
+    print('----------debug------------')
+    print('data initialized')
+    exit(0)
+    
     trainer = LLaVATrainer(model=model, #does not require model.to(device), huggingface/deepspeed does it for you?
                             tokenizer=tokenizer,
                             args=training_arguments,
