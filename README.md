@@ -4,9 +4,10 @@
 <h5 align="center">
 <div align="center">
 
-[Hongbo Jin](https://hongbo-jin.github.io/hongbo.github.io/)<sup>1*</sup>,
-[Tinghong Ye]()<sup>*</sup>,
+[Hongbo Jin](https://hongbo-jin.github.io/hongbo.github.io/)<sup></sup>,
+[Tinghong Ye]()<sup></sup>,
 [Jin Wang]()<sup></sup>, 
+[Bo Tang]()<sup></sup>,
 [Yaochen Liu]()<sup></sup>,
 [Binye Liu](https://github.com/Xjtulby)<sup></sup>,
 [Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>1,✉</sup>
@@ -24,10 +25,10 @@
 - [2025-05] 🔊 Our [HBLLaVA](https://github.com/Hongbo-Jin/HBLLaVA) repository is released!
 
 ## <img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/256/2435/2435606.png"> About
-**HBLLaVA** is a universal 3D reasoning model built upon the fully open-source [TinyLLaVA-Video](https://github.com/ZhangXJ199/TinyLLaVA-Video) framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
+**HBLLaVA** is a universal 3D reasoning framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
 The model and training process are fully traceable, ensuring reproducibility and reliability. This repository provides the model, code, and experimental setups for easy replication.
-
-![Peking University HBLLaVA](https://i.postimg.cc/wMYTVkRS/aha-moment.png)
+<!-- 
+![Peking University HBLLaVA](https://i.postimg.cc/wMYTVkRS/aha-moment.png) -->
 
 ## 🛠️ Installation
 
@@ -148,12 +149,7 @@ We currently provide evaluations on 4 benchmarks, including [Video-MME](https://
 
 If you find our work interesting and helpful, please consider giving our repo a star. Additionally, if you would like to cite our work, please use the following format:
 ```bibtex
-@article{jin2025hbllava,
-  title={TinyLLaVA-Video-R1: Towards Smaller LMMs for Video Reasoning},
-  author={Jin, Hongbo and Ye, Tinghong and Wang, Jin and Li, Ge},
-  journal={},
-  year={2025}
-}
+
 ```
 
 ## 📨 Contact
