@@ -3,7 +3,7 @@
 VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/Nextqa/nextqa-coldstart-16-p.json"
 VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/NExTVideo"
 
-# MODEL_PATH=/mnt/cloud_disk/public_ckpts/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512
+MODEL_PATH=/mnt/cloud_disk/public_ckpts/HBLLaVA-Qwen2.5-0.5B-Group-16-512
 LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-0.5B # llm path
 VT_VERSION=/mnt/cloud_disk/public_ckpts/siglip-so400m-patch14-384 #vision tower path
 CN_VERSION=groupresampler #connector type
@@ -59,5 +59,5 @@ deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train_co
     --lazy_preprocess True \
     --report_to tensorboard \
     --tokenizer_use_fast False \
-    --run_name HBLLaVA-Coldstart
-      # --pretrained_model_path $MODEL_PATH \
+    --run_name HBLLaVA-Coldstart \
+    # --pretrained_model_path $MODEL_PATH \

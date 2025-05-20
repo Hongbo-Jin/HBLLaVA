@@ -21,13 +21,14 @@ def get_value_from_kwargs(kwargs, name):
         return None
 
 class HBLlavaPreTrainedModel(PreTrainedModel):
+    
     config_class = HBLlavaConfig
-    base_model_prefix = "model"
+    base_model_prefix = "HBLLaVABase"
     supports_gradient_checkpointing = True
     _no_split_modules = ["LlavaVisionAttention"]
     _skip_keys_device_placement = "past_key_values"
     _supports_flash_attn_2 = True
-
+    
     def _init_weights(self, module):
         std = (
             self.config.initializer_range
@@ -56,7 +57,7 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
     def __init__(self, config: HBLlavaConfig):
         
         super().__init__(config)
-
+        
         self.language_model = LLMFactory(config.llm_model_name_or_path)[0](config.text_config)
         self.vision_tower = VisionTowerFactory(config.vision_model_name_or_path)(config.vision_config)
         self.connector = ConnectorFactory(config.connector_type)(config)

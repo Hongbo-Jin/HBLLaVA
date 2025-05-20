@@ -63,8 +63,14 @@ def train():
     model_config = HBLlavaConfig()
     model_config.load_from_config(model_arguments)
 
-    model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
+    model=HBLlavaBase(model_config).to('cuda')
+    # model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
+    print(training_recipe)
+    
     model = training_recipe(model)
+    
+    print('-------debug here--------')
+    exit(0)
     
     model.config.use_cache = False
     model.config.image_aspect_ratio = data_arguments.image_aspect_ratio
