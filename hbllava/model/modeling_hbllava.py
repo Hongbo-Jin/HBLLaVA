@@ -227,6 +227,10 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
     
     def prepare_inputs_for_generation(self, input_ids, past_key_values=None,
                                       inputs_embeds=None, **kwargs):
+        print('---------------debug---------------------')
+        print(kwargs)
+        exit(0)
+        
         images = kwargs.pop("images", None)
         image_sizes = kwargs.pop("image_sizes", None)
         inputs = self.language_model.prepare_inputs_for_generation(

@@ -37,7 +37,6 @@ class HBLlavaConfig(PretrainedConfig):
         tune_type_connector = 'frozen',
         tune_type_vision_tower = 'frozen',
         tune_vision_tower_from_layer = -1,
-        
         **kwargs
 
     ):
