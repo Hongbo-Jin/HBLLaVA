@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/Nextqa/nextqa-coldstart-16.json"
-VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/snapshots/NExTQA/video"
+VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/Nextqa/nextqa-coldstart-16-p.json"
+VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/NExTVideo"
 
 MODEL_PATH=/mnt/cloud_disk/public_ckpts/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512
 LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-3B # llm path
@@ -16,7 +16,7 @@ MODEL_MAX_LENGTH=3072
 NUM_FRAME=16
 NUM_QUERY=512
 
-deepspeed --include localhost:1,2 --master_port 29501 hbllava/train/train_coldstart.py \
+deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train_coldstart.py \
     --deepspeed ./scripts/zero3.json \
     --video_data_path  $VIDEO_DATA_PATH \
     --video_folder $VIDEO_PATH \

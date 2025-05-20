@@ -79,14 +79,11 @@ def train():
     video_data_module = make_supervised_data_module(tokenizer=tokenizer,
                                                     data_args=data_arguments)
     
-    print('----------debug------------')
-    print('data initialized')
-    exit(0)
-    
     trainer = LLaVATrainer(model=model, #does not require model.to(device), huggingface/deepspeed does it for you?
                             tokenizer=tokenizer,
                             args=training_arguments,
                             **video_data_module)
+    
     trainer.train()
     
     training_recipe.save(model, trainer)
