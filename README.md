@@ -1,4 +1,4 @@
-<h2 align="center">HBLLaVA
+<h2 align="center">ScanReasoner
 </a>
 
 <h5 align="center">

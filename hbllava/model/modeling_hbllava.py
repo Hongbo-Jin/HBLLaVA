@@ -206,14 +206,18 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         )
     
     def encode_videos(self, videos):
-        kwargs = {}
-        kwargs['vision_feature_layer'] = self.config.vision_feature_layer
-        kwargs['vision_feature_select_strategy'] = self.config.vision_feature_select_strategy
+        # kwargs = {}
+        # kwargs['vision_feature_layer'] = self.config.vision_feature_layer
+        # kwargs['vision_feature_select_strategy'] = self.config.vision_feature_select_strategy
          
         image_features = []
         for video in videos:
             video = video.to(device=self.device, dtype=self.dtype) #torch.Size([frame, 3, 384, 384])
-            image_feature = self.vision_tower(video, **kwargs) #torch.Size([frame, 728, 1152])
+            print(video.shape)
+            # image_feature = self.vision_tower(video, **kwargs) #torch.Size([frame, 728, 1152])
+            image_feature = self.vision_tower(video) #torch.Size([frame, 728, 1152])
+            print(f'image feature : {image_feature.shape}')
+            exit(0)
             last_dim = image_feature.shape[-1]
             image_feature = image_feature.reshape(1, -1, last_dim) #torch.Size([1, frame*728, 1152])
             image_feature = self.connector(image_feature) #torch.Size([1, 512, 2560])
