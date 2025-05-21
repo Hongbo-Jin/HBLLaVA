@@ -9,10 +9,13 @@ from torch import nn
 from transformers import PreTrainedModel
 from transformers.modeling_outputs import CausalLMOutputWithPast
 from transformers.generation.utils import GenerateOutput
+from transformers import Qwen2ForCausalLM, SiglipImageProcessor,AutoModel,AutoTokenizer
 
 from . import LLMFactory, ConnectorFactory, VisionTowerFactory
 from .configuration_hbllava import HBLlavaConfig
 from ..utils.constants import *
+from .vision_tower.siglip import SIGLIPVisionTower
+from .connector.base import SimpleResBlock
 
 def get_value_from_kwargs(kwargs, name):
     if name in kwargs:
@@ -23,7 +26,7 @@ def get_value_from_kwargs(kwargs, name):
 class HBLlavaPreTrainedModel(PreTrainedModel):
     
     config_class = HBLlavaConfig
-    base_model_prefix = "HBLLaVABase"
+    base_model_prefix = "HBLLaVA_Base"
     supports_gradient_checkpointing = True
     _no_split_modules = ["LlavaVisionAttention"]
     _skip_keys_device_placement = "past_key_values"
@@ -58,21 +61,25 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         
         super().__init__(config)
         
-        self.language_model = LLMFactory(config.llm_model_name_or_path)[0](config.text_config)
-        self.vision_tower = VisionTowerFactory(config.vision_model_name_or_path)(config.vision_config)
-        self.connector = ConnectorFactory(config.connector_type)(config)
+        self.language_model = Qwen2ForCausalLM(config.text_config)
+        self.connector=SimpleResBlock(channels=2048)
+        self.post_init()
+        
+        self.language_model=Qwen2ForCausalLM.from_pretrained(config.llm_model_name_or_path)
+        self.vision_tower=AutoModel.from_pretrained(config.vision_model_name_or_path)
+        self.vision_tower._image_processor = SiglipImageProcessor.from_pretrained(config.vision_model_name_or_path)
+       
 
-        (Tokenizer, post_load) = LLMFactory(config.llm_model_name_or_path)[1]
-        self.tokenizer = post_load(Tokenizer.from_pretrained(
+        self.tokenizer = AutoTokenizer.from_pretrained(
             config.tokenizer_name_or_path,
             cache_dir = config.cache_dir,
             model_max_length = config.tokenizer_model_max_length,
             padding_side = config.tokenizer_padding_side,
             use_fast = config.tokenizer_use_fast,
-        ))
-        self.post_init()
-
-    
+        )
+        self.tokenizer.unk_token = self.tokenizer.pad_token
+        
+        
     def get_input_embeddings(self):
         return self.language_model.get_input_embeddings()
 
@@ -228,9 +235,6 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
     
     def prepare_inputs_for_generation(self, input_ids, past_key_values=None,
                                       inputs_embeds=None, **kwargs):
-        print('---------------debug---------------------')
-        print(kwargs)
-        exit(0)
         
         images = kwargs.pop("images", None)
         image_sizes = kwargs.pop("image_sizes", None)

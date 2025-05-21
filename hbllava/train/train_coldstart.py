@@ -63,22 +63,19 @@ def train():
     model_config = HBLlavaConfig()
     model_config.load_from_config(model_arguments)
 
-    model=HBLlavaBase(model_config).to('cuda')
+    # model=HBLlavaBase(model_config).to('cuda')
+    model=HBLlavaForConditionalGeneration(model_config).to('cuda')
     # model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
-    print(training_recipe)
     
     model = training_recipe(model)
-    
-    print('-------debug here--------')
-    exit(0)
+    tokenizer = model.tokenizer
     
     model.config.use_cache = False
     model.config.image_aspect_ratio = data_arguments.image_aspect_ratio
-    tokenizer = model.tokenizer
     data_arguments.image_processor = model.vision_tower._image_processor
     data_arguments.is_multimodal = True
-    log_trainable_params(model)  # not work well with zero3
-    
+    # log_trainable_params(model)  # not work well with zero3
+ 
     data_arguments.data_path = data_arguments.video_data_path
     data_arguments.data_folder = data_arguments.video_folder
     
