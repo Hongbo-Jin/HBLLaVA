@@ -15,6 +15,7 @@ class VideoPreprocess:
         self.image_processor = image_processor
     
     def __call__(self, image):
+        
         if isinstance(image, Image.Image):
             if self.image_aspect_ratio == 'pad':
                 image = self.expand2square(image, tuple(int(x * 255) for x in self.image_processor.image_mean))

@@ -1,12 +1,6 @@
 import json
 
-with open('./data/gt_files/Nextqa/nextqa-coldstart-16.json','r') as file:
+with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/scanqa_temp_gt.json','r') as file:
     data=json.load(file)
     
-
-for sample in data:
-    sample['video']=sample['video'].replace('/NextQA/NExTVideo','')
-
-with open('./data/gt_files/Nextqa/nextqa-coldstart-16-p.json','w') as f:
-    json.dump(data,f,indent=4)
 

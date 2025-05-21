@@ -61,6 +61,12 @@ class LazySupervisedDataset(LSDataset):
     def __getitem__(self, i) -> Dict[str, torch.Tensor]:
         sources = self.list_data_dict[i]
         data_dict = self.text_preprocess(copy.deepcopy(sources["conversations"]))
+        
+        print('-----------debug-------------')
+        print(sources)
+        exit(0)
+        
+        
         if 'image' in sources:
             image_file = self.list_data_dict[i]['image']
             image_folder = self.data_args.image_folder
@@ -87,7 +93,7 @@ class LazySupervisedDataset(LSDataset):
                 num_frames_to_extract = max(1, int(duration))
                 frame_indices = np.linspace(0, total_frames - 1, num_frames_to_extract, dtype=int)
             video_data = video_data[frame_indices] #torch.Size([8, 3, W, H])
-
+            
             videos = []
             for video in video_data:
                 video = self.video_preprocess(video)
@@ -95,6 +101,9 @@ class LazySupervisedDataset(LSDataset):
             videos = torch.stack(videos)
             
             data_dict['video'] = videos
+        elif '3d' in sources:
+            print('processing 3d data')
+            print('----------------------------')
         elif self.data_args.is_multimodal:
             # image does not exist in the data, but the model is multimodal
             # print(f'{i}:{sources}')
