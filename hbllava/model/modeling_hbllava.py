@@ -64,7 +64,7 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         super().__init__(config)
         
         self.language_model = Qwen2ForCausalLM(config.text_config)
-        self.connector=Custom_Connector(input_channels=1024,output_channels=2048)
+        self.connector=Custom_Connector(input_channels=1024,output_channels=896)
         self.post_init()
         
         self.language_model=Qwen2ForCausalLM.from_pretrained(config.llm_model_name_or_path)
@@ -308,6 +308,7 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
             split_sizes = [x.shape[0] for x in cur_labels_noim] #[0, len-1]
             cur_input_embeds = self.language_model.get_input_embeddings()(torch.cat(cur_input_ids_noim)) #torch.Size([len-1, 2560])
             cur_input_embeds_no_im = torch.split(cur_input_embeds, split_sizes, dim=0)
+            
             cur_new_input_embeds = []
             cur_new_labels = []
 
