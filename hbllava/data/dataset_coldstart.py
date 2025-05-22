@@ -7,6 +7,7 @@ import os
 from .text_preprocess import TextPreprocess
 from .image_preprocess import ImagePreprocess
 from .video_preprocess import VideoPreprocess
+from .scene_preprocess import ScenePreprocess
 from ..utils.arguments import DataArguments
 from ..utils.constants import *
 
@@ -18,6 +19,15 @@ from torch.utils.data import Dataset as LSDataset
 import numpy as np
 import av
 from pytorchvideo.data.encoded_video import EncodedVideo
+
+def get_jpg_files_os(directory):
+    jpg_files = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith('.jpg'):
+                jpg_files.append(os.path.join(root, file))
+    return jpg_files
+
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -37,6 +47,7 @@ class LazySupervisedDataset(LSDataset):
         self.text_preprocess = TextPreprocess(tokenizer, data_args.conv_version)
         self.image_preprocess = ImagePreprocess(data_args.image_processor, data_args)
         self.video_preprocess = VideoPreprocess(data_args.image_processor, data_args)
+        self.scene_preprocess = ScenePreprocess(data_args.image_processor)
 
     def __len__(self):
         return len(self.list_data_dict)
@@ -61,11 +72,6 @@ class LazySupervisedDataset(LSDataset):
     def __getitem__(self, i) -> Dict[str, torch.Tensor]:
         sources = self.list_data_dict[i]
         data_dict = self.text_preprocess(copy.deepcopy(sources["conversations"]))
-        
-        print('-----------debug-------------')
-        print(sources)
-        exit(0)
-        
         
         if 'image' in sources:
             image_file = self.list_data_dict[i]['image']
@@ -101,9 +107,18 @@ class LazySupervisedDataset(LSDataset):
             videos = torch.stack(videos)
             
             data_dict['video'] = videos
-        elif '3d' in sources:
-            print('processing 3d data')
-            print('----------------------------')
+        elif 'scene' in sources:
+            image_paths=get_jpg_files_os(sources['scene'])
+            
+            images=[]
+            for image_path in image_paths[0:16]:
+                image = Image.open(image_path)
+                image_processed= self.scene_preprocess(image=image)
+                images.append(image_processed)
+            
+            images=torch.stack(images)
+            data_dict['video'] = images
+            
         elif self.data_args.is_multimodal:
             # image does not exist in the data, but the model is multimodal
             # print(f'{i}:{sources}')

@@ -7,7 +7,9 @@ VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/NExTVideo"
 
 MODEL_PATH=/mnt/cloud_disk/public_ckpts/HBLLaVA-Qwen2.5-0.5B-Group-16-512
 LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-0.5B # llm path
-VT_VERSION=/mnt/cloud_disk/public_ckpts/siglip-so400m-patch14-384 #vision tower path
+# VT_VERSION=/mnt/cloud_disk/public_ckpts/siglip-so400m-patch14-384 #vision tower path
+VT_VERSION=/mnt/cloud_disk/public_ckpts/clip-vit-large-patch14-336
+
 CN_VERSION=groupresampler #connector type
 VT_VARIANT="${VT_VERSION##*/}"
 LLM_VARIANT="${LLM_VERSION##*/}"
@@ -21,7 +23,7 @@ NUM_QUERY=512
 deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train_coldstart.py \
     --deepspeed ./scripts/zero3.json \
     --video_data_path  $SCENE_DATA_PATH \
-    --video_folder  \
+    --video_folder  "none" \
     --is_multimodal True \
     --conv_version $CONV_VERSION \
     --model_name_or_path $LLM_VERSION \

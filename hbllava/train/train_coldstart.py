@@ -72,7 +72,7 @@ def train():
     
     model.config.use_cache = False
     model.config.image_aspect_ratio = data_arguments.image_aspect_ratio
-    data_arguments.image_processor = model.vision_tower._image_processor
+    data_arguments.image_processor = model.vision_tower.image_processor
     data_arguments.is_multimodal = True
     # log_trainable_params(model)  # not work well with zero3
  

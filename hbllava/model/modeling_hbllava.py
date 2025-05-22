@@ -14,8 +14,10 @@ from transformers import Qwen2ForCausalLM, SiglipImageProcessor,AutoModel,AutoTo
 from . import LLMFactory, ConnectorFactory, VisionTowerFactory
 from .configuration_hbllava import HBLlavaConfig
 from ..utils.constants import *
-from .vision_tower.siglip import SIGLIPVisionTower
+from .vision_tower.clip_encoder import CLIPVisionTower
+# from .vision_tower.siglip import SIGLIPVisionTower
 from .connector.base import SimpleResBlock
+from .connector.custom_connector import Custom_Connector
 
 def get_value_from_kwargs(kwargs, name):
     if name in kwargs:
@@ -62,13 +64,13 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         super().__init__(config)
         
         self.language_model = Qwen2ForCausalLM(config.text_config)
-        self.connector=SimpleResBlock(channels=2048)
+        self.connector=Custom_Connector(input_channels=1024,output_channels=2048)
         self.post_init()
         
         self.language_model=Qwen2ForCausalLM.from_pretrained(config.llm_model_name_or_path)
-        self.vision_tower=AutoModel.from_pretrained(config.vision_model_name_or_path)
-        self.vision_tower._image_processor = SiglipImageProcessor.from_pretrained(config.vision_model_name_or_path)
-       
+        # self.vision_tower=AutoModel.from_pretrained(config.vision_model_name_or_path)
+        # self.vision_tower._image_processor = SiglipImageProcessor.from_pretrained(config.vision_model_name_or_path)
+        self.vision_tower=CLIPVisionTower(config.vision_model_name_or_path)
 
         self.tokenizer = AutoTokenizer.from_pretrained(
             config.tokenizer_name_or_path,
@@ -127,7 +129,7 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         return_dict: Optional[bool] = None,
     ) -> Union[Tuple, CausalLMOutputWithPast]:
         use_cache = use_cache if use_cache is not None else self.config.use_cache
-
+        
         if inputs_embeds is None:
             (
                 input_ids,
@@ -171,6 +173,10 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         image_sizes: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> Union[GenerateOutput, torch.LongTensor]:
+        
+        print('-----------generate---------------')
+        exit(0)
+        
         position_ids = kwargs.pop("position_ids", None)
         attention_mask = kwargs.pop("attention_mask", None)
         if "inputs_embeds" in kwargs:
@@ -204,36 +210,26 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
             inputs_embeds=inputs_embeds,
             **kwargs
         )
+        
+    def encode_scene(self, images):
+        
+        print('encoding---------------------------')
+        exit(0)
+        return None
     
     def encode_videos(self, videos):
-        # kwargs = {}
-        # kwargs['vision_feature_layer'] = self.config.vision_feature_layer
-        # kwargs['vision_feature_select_strategy'] = self.config.vision_feature_select_strategy
-         
+        
         image_features = []
         for video in videos:
-            video = video.to(device=self.device, dtype=self.dtype) #torch.Size([frame, 3, 384, 384])
-            print(video.shape)
-            # image_feature = self.vision_tower(video, **kwargs) #torch.Size([frame, 728, 1152])
-            
-            image_feature = self.vision_tower(video) #torch.Size([frame, 728, 1152])
-            print(f'image feature : {image_feature.shape}')
-            exit(0)
+            video = video.to(device=self.device, dtype=self.dtype) #torch.Size([frame, 3, 384, 384]) 
+            image_feature = self.vision_tower(video) #torch.Size([frame, 576, 1024])
             last_dim = image_feature.shape[-1]
-            image_feature = image_feature.reshape(1, -1, last_dim) #torch.Size([1, frame*728, 1152])
-            image_feature = self.connector(image_feature) #torch.Size([1, 512, 2560])
+            image_feature = image_feature.reshape(1, -1, last_dim) #torch.Size([1, frame*576, 1024])
+            image_feature = self.connector(image_feature) #torch.Size([1, 512, 2048])
+
             image_features.append(image_feature)
-        image_features = torch.cat(image_features, dim=0) #torch.Size([bs, 512, 2560])
-        """
-        videos = videos.to(device=self.device, dtype=self.dtype) #torch.Size([bs, 16, 3, 384, 384])
-        videos = videos.permute(1, 0, 2, 3, 4)
-        image_features = []
-        for video in videos:
-            image_feature = self.vision_tower(video, **kwargs) #torch.Size([bs, 728, 1152])
-            image_features.append(image_feature)
-        image_features = torch.cat(image_features, dim=1) #torch.Size([bs, 728*16, 1152])
-        image_features = self.connector(image_features) #torch.Size([bs, 512, 2560])
-        """
+        image_features = torch.cat(image_features, dim=0) #torch.Size([bs, 512, 2048])
+
         return image_features
     
     
@@ -254,8 +250,8 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         
     def prepare_inputs_labels_for_multimodal(
         self, input_ids, position_ids, attention_mask, past_key_values, labels,
-        images, videos, image_sizes=None
-    ):
+        images, videos, image_sizes=None):
+        
         vision_tower = self.vision_tower
         if vision_tower is None or (images is None and videos is None) or input_ids.shape[1] == 1:
             return input_ids, position_ids, attention_mask, past_key_values, None, labels
