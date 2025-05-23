@@ -112,8 +112,10 @@ class HBLLaVATrainer_Reason(Trainer):
             prompt_inputs["input_ids"] = result['input_ids'].unsqueeze(0).cuda()
         
         for (cur_idx, cur_input) in enumerate(inputs):
+            
             scene_file=inputs[cur_idx]['filename']
-            files=get_jpg_files_os(scene_file)[:self.num_frame]
+            scene_folder = os.path.join(self.data_path, scene_file)
+            files=get_jpg_files_os(scene_folder)[:self.num_frame]
 
             scene_images=[]
             for file in files:

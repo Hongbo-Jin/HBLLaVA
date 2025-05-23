@@ -164,7 +164,7 @@ def train():
     #log_trainable_params(model)  # not work well with zero3
 
     reward_funcs = [accuracy_reward, format_reward]
-    dataset =  DatasetDict({"train": Dataset.from_json(data_arguments.video_folder)})
+    dataset =  DatasetDict({"train": Dataset.from_json(data_arguments.video_data_path)})
     dataset = dataset.map(make_conversation_video)
     
     text_processor = TextPreprocess(tokenizer, "qwen2_base")
@@ -181,7 +181,7 @@ def train():
         train_dataset=dataset["train"],
         processing_class=model.tokenizer,
         attn_implementation=model_arguments.attn_implementation,
-        data_path=data_arguments.video_data_path,
+        data_path=data_arguments.video_folder,
     )
     trainer.train()
     training_recipe.save(model, trainer)
