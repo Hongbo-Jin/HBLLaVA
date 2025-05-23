@@ -164,24 +164,18 @@ def train():
     #log_trainable_params(model)  # not work well with zero3
 
     reward_funcs = [accuracy_reward, format_reward]
-    
     dataset =  DatasetDict({"train": Dataset.from_json(data_arguments.video_folder)})
-    
-    print(f'-----------------------------')
-    print(dataset)
-    exit(0)
-    
     dataset = dataset.map(make_conversation_video)
     
     text_processor = TextPreprocess(tokenizer, "qwen2_base")
-    image_processor = model.vision_tower._image_processor
+    image_processor = model.vision_tower.image_processor
     data_args = model.config
     video_preprocess = VideoPreprocess(image_processor, data_args)
     
-    trainer = LLaVATrainer_Reason(
+    trainer = HBLLaVATrainer_Reason(
         model=model,
         text_processor=text_processor,
-        video_preprocess=video_preprocess,
+        scene_preprocess=video_preprocess,
         reward_funcs=reward_funcs,
         args=training_arguments,
         train_dataset=dataset["train"],

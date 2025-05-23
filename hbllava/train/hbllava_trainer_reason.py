@@ -31,7 +31,8 @@ class HBLLaVATrainer_Reason(Trainer):
         self,
         model: Union[str, PreTrainedModel],
         text_processor: Union[str, PreTrainedModel],
-        video_preprocess: Union[str, PreTrainedModel],
+        # video_preprocess: Union[str, PreTrainedModel],
+        scene_preprocess: Union[str, PreTrainedModel],
         reward_funcs: Union[RewardFunc, list[RewardFunc]],
         args: GRPOConfig = None,
         train_dataset: Optional[Union[Dataset, IterableDataset]] = None,
@@ -45,11 +46,13 @@ class HBLLaVATrainer_Reason(Trainer):
         model_init_kwargs = {}
         model_init_kwargs["attn_implementation"] = attn_implementation
         
-        self.ref_model = TinyLlavaForConditionalGeneration.from_pretrained(args.pretrained_model_path).to('cuda')
+        self.ref_model = HBLlavaForConditionalGeneration.from_pretrained(args.pretrained_model_path).to('cuda')
         self.processing_class = processing_class
         self.text_processor = text_processor
-        self.video_preprocess = video_preprocess
+        # self.video_preprocess = video_preprocess
+        self.scene_preprocess = scene_preprocess
         self.reward_funcs = reward_funcs
+        
 
         def data_collator(features):  # No data collation is needed in GRPO
             return features
