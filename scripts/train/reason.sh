@@ -2,7 +2,7 @@
 SCENE_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt.json"
 
 VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/Nextqa/nextqa-coldstart-16-p.json"
-VIDEO_PATH="/mnt/cloud_disk/public_data/NExTQA/NExTVideo"
+VIDEO_PATH="/mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images"
 
 MODEL_PATH=/mnt/cloud_disk/jhb/binjiang/ckpts/HBLLaVA-Coldstart-16
 LLM_VERSION=/mnt/cloud_disk/public_ckpts/Qwen2.5-0.5B # llm path
