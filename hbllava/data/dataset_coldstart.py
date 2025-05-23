@@ -108,6 +108,9 @@ class LazySupervisedDataset(LSDataset):
             
             data_dict['video'] = videos
         elif 'scene' in sources:
+            scene_file=sources['scene']
+            scene_folder = os.path.join(self.data_args.video_folder, scene_file)
+        
             image_paths=get_jpg_files_os(sources['scene'])
             
             images=[]

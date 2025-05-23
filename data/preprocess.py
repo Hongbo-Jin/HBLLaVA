@@ -1,11 +1,16 @@
 import json
 import re
 
-with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/scanqa_temp_gt.json','r') as file:
+with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt.json','r') as file:
     data=json.load(file)
     
 result=[]
 for idx,sample in enumerate(data):
+    
+    sample['scene']=sample['scene'].split('/')[-1]
+
+with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt.json','w') as f :
+    json.dump(data,f,indent=4)
     
     question=sample['conversations'][0]['value'].split('Output the thinking process')[0].split('<image>\n')[-1]
     solution= re.findall(r'<answer>(.*?)</answer>', sample['conversations'][1]['value'])
@@ -22,7 +27,7 @@ for idx,sample in enumerate(data):
         }
     )
     
-with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt_reason.json','w') as f :
-    json.dump(result,f,indent=4)
+# with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt_reason.json','w') as f :
+#     json.dump(result,f,indent=4)
     
     
