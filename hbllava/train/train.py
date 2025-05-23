@@ -146,14 +146,15 @@ def train():
     parser = transformers.HfArgumentParser((ModelArguments, DataArguments, TrainingArguments))
     model_arguments, data_arguments, training_arguments = parser.parse_args_into_dataclasses()
     logger_setting(getattr(training_arguments, 'output_dir', None))
-
+    
     training_recipe = TrainingRecipeFactory(training_arguments.training_recipe)(training_arguments) 
     model_args = load_settings(model_arguments, data_arguments, training_arguments)
     model_args = training_recipe.add_args(model_args)
-    model_config = TinyLlavaConfig()
+    model_config = HBLlavaConfig()
     model_config.load_from_config(model_arguments)
 
-    model = TinyLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
+    model = HBLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
+    # model = TinyLlavaForConditionalGeneration.from_pretrained(training_arguments.pretrained_model_path).to('cuda')
     model = training_recipe(model)
     model.config.use_cache = False
     tokenizer = model.tokenizer
@@ -162,6 +163,8 @@ def train():
     #data_arguments.is_multimodal = True
     #log_trainable_params(model)  # not work well with zero3
     
+    print('--------------')
+    exit(0)
     reward_funcs = [accuracy_reward, format_reward]
     dataset =  DatasetDict({"train": Dataset.from_json(data_arguments.video_folder)})
     dataset = dataset.map(make_conversation_video)
