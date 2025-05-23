@@ -23,6 +23,8 @@ from hbllava.model import *
 
 from pytorchvideo.data.encoded_video import EncodedVideo
 import numpy as np
+from hbllava.utils import get_jpg_files_os
+from PIL import Image
 
 RewardFunc = Union[str, PreTrainedModel, Callable[[list, list], list[float]]]
 
@@ -96,35 +98,33 @@ class HBLLaVATrainer_Reason(Trainer):
         return inputs
 
     def compute_loss(self, model, inputs, num_items_in_batch=None):
-        prompt_inputs = {}
         
+        prompt_inputs = {} 
         prompts = [x["prompt"] for x in inputs]
         prompts_text = []
         for example in inputs:
             query = DEFAULT_IMAGE_TOKEN + example["prompt"][0]["content"][1]["text"]
             msg = Message()
             msg.add_message(query) 
+            
             result = self.text_processor(msg.messages, mode='eval')
             prompts_text.append(result['prompt'])
             prompt_inputs["input_ids"] = result['input_ids'].unsqueeze(0).cuda()
         
         for (cur_idx, cur_input) in enumerate(inputs):
-            video_file = self.data_path + inputs[cur_idx]["video_filename"][1:]
-            video = EncodedVideo.from_path(video_file, decoder="decord", decode_audio=False)
-            duration = video.duration
-            video_data = video.get_clip(start_sec=0.0, end_sec=duration)
-            video_data = video_data['video'].permute(1, 0, 2, 3) #torch.Size([l, 3, W, H])
+            scene_file=inputs[cur_idx]['filename']
+            files=get_jpg_files_os(scene_file)[:self.num_frame]
 
-            total_frames = video_data.shape[0]
-            frame_indices = np.linspace(0, total_frames - 1, self.num_frame, dtype=int)
-            video_data = video_data[frame_indices]
-            
-            videos = []
-            for video in video_data:
-                video = self.video_preprocess(video)
-                videos.append(video)
-            video_tensor = torch.stack(videos)
-            video_tensor = video_tensor.unsqueeze(dim=0)
+            scene_images=[]
+            for file in files:
+                img=Image.open(file)
+                image_processed= self.scene_preprocess(image=img)
+                scene_images.append(image_processed)
+            scene_images=torch.stack(scene_images)
+        
+            total_frames = scene_images.shape[0]
+        
+            video_tensor = scene_images.unsqueeze(dim=0)
             prompt_inputs["video"] = video_tensor
 
         prompt_inputs = super()._prepare_inputs(prompt_inputs)

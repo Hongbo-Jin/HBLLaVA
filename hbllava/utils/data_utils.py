@@ -1,6 +1,7 @@
 import ast
 import math
 from PIL import Image
+import os
 
 def get_anyres_image_grid_shape(image_size, grid_pinpoints, patch_size):
     """
@@ -112,3 +113,12 @@ def get_value_from_kwargs(kwargs, name):
         return kwargs.pop(name)
     else:
         return None
+    
+def get_jpg_files_os(directory):
+    jpg_files = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith('.jpg'):
+                jpg_files.append(os.path.join(root, file))
+    return jpg_files
+    

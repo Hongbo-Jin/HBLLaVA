@@ -170,12 +170,12 @@ def train():
     text_processor = TextPreprocess(tokenizer, "qwen2_base")
     image_processor = model.vision_tower.image_processor
     data_args = model.config
-    video_preprocess = VideoPreprocess(image_processor, data_args)
+    scene_preprocess = ScenePreprocess(image_processor)
     
     trainer = HBLLaVATrainer_Reason(
         model=model,
         text_processor=text_processor,
-        scene_preprocess=video_preprocess,
+        scene_preprocess=scene_preprocess,
         reward_funcs=reward_funcs,
         args=training_arguments,
         train_dataset=dataset["train"],
