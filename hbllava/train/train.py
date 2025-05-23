@@ -7,7 +7,7 @@ import tokenizers
 import transformers
 from datasets import Dataset, DatasetDict
 
-from hbllava.train.tinyllava_trainer_reason import LLaVATrainer_Reason
+from hbllava.train.hbllava_trainer_reason import HBLLaVATrainer_Reason
 from hbllava.training_recipe import TrainingRecipeFactory
 from hbllava.utils import *
 from hbllava.model import *

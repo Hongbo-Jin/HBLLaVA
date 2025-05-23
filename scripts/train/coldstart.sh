@@ -42,7 +42,7 @@ deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train_co
     --tune_vision_tower_from_layer 0 \
     --tune_type_connector full \
     --group_by_modality_length False \
-    --output_dir /mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/HBLLaVA-Video-Coldstart-16 \
+    --output_dir /mnt/cloud_disk/jhb/binjiang/ckpts/HBLLaVA-Coldstart-16 \
     --num_train_epochs 1 \
     --per_device_train_batch_size 1 \
     --per_device_eval_batch_size 1 \
@@ -64,4 +64,5 @@ deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train_co
     --report_to tensorboard \
     --tokenizer_use_fast False \
     --run_name HBLLaVA-Coldstart \
+    # --hidden_size 896 \  # llm&vision hidden size
     # --pretrained_model_path $MODEL_PATH \

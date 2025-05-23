@@ -14,7 +14,7 @@ class HBLlavaConfig(PretrainedConfig):
         vision_model_name_or_path2 = '',
         connector_type = None,
         text_config=None,
-        hidden_size=2048,
+        hidden_size=896,
         vocab_size=32000,
         ignore_index=-100,
         image_token_index=32000,
@@ -67,6 +67,7 @@ class HBLlavaConfig(PretrainedConfig):
         self.tokenizer_use_fast = tokenizer_use_fast
         self._load_text_config(text_config)
         self._load_vision_config(vision_config)
+        self.embedding_dim=hidden_size
             
         super().__init__(**kwargs)
     

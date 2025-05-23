@@ -64,7 +64,8 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         super().__init__(config)
         
         self.language_model = Qwen2ForCausalLM(config.text_config)
-        self.connector=Custom_Connector(input_channels=1024,output_channels=896)
+        self.connector=Custom_Connector(input_channels=1024,output_channels=config.embedding_dim)
+        print(self.connector)
         self.post_init()
         
         self.language_model=Qwen2ForCausalLM.from_pretrained(config.llm_model_name_or_path)

@@ -32,6 +32,7 @@ class ModelArguments:
     )
     tokenizer_use_fast: bool = field(default=False)
     tokenizer_padding_side: str = field(default='right')
+    # hidden_size: Optional[int] = field(default=896)
 
 
 @dataclass
