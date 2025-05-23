@@ -1,5 +1,5 @@
 #!/bin/bash
-SCENE_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt.json"
+SCENE_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/tmp_gt_reason.json"
 
 VIDEO_DATA_PATH="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/Nextqa/nextqa-coldstart-16-p.json"
 VIDEO_PATH="/mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images"
@@ -19,8 +19,8 @@ NUM_QUERY=512
 
 deepspeed --include localhost:0,1,2,3 --master_port 29501 hbllava/train/train.py \
     --deepspeed ./scripts/zero3.json \
-    --video_data_path  $VIDEO_DATA_PATH \
-    --video_folder $VIDEO_PATH \
+    --video_data_path  / \
+    --video_folder $SCENE_DATA_PATH \
     --is_multimodal True \
     --conv_version $CONV_VERSION \
     --model_name_or_path $LLM_VERSION \
