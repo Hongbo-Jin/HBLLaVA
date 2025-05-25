@@ -101,12 +101,12 @@ def eval_model(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="checkpoints/llava3d-v1.5-7b-task-v3-tuning")
+    parser.add_argument("--model-path", type=str, default="ckpts/HBLLaVA-Coldstart-16")
     parser.add_argument("--model-base", type=str, default=None)
-    parser.add_argument("--video-folder", type=str, default="playground/data/LLaVA-3D-Pretrain")
-    parser.add_argument("--question-file", type=str, default="playground/data/annotations/llava3d_sqa3d_val_question.json")
-    parser.add_argument("--answers-file", type=str, default="./llava3d_sqa3d_val_answer_pred.json")
-    parser.add_argument("--conv-mode", type=str, default="llava_v1")
+    parser.add_argument("--video-folder", type=str, default="playground/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images")
+    parser.add_argument("--question-file", type=str, default="data/gt_files/scannet/tmp_gt_reason.json")
+    parser.add_argument("--answers-file", type=str, default="output/hbllava_scanqa_val_answer_pred.json")
+    parser.add_argument("--conv-mode", type=str, default="qwen2")
     parser.add_argument("--num-chunks", type=int, default=1)
     parser.add_argument("--chunk-idx", type=int, default=0)
     parser.add_argument("--temperature", type=float, default=0.2)
