@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "hbllava"
 version = "1.0.0"
-description = "A Framework of Small-scale Large Multimodal Models."
+description = "A Framework of 3D Large Multimodal Models."
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
