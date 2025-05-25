@@ -4,7 +4,7 @@
 <h5 align="center">
 <div align="center">
 
-[Hongbo Jin](https://hongbo-jin.github.io/hongbo.github.io/)<sup></sup>,
+[Hongbo Jin](https://hongbo-jin.github.io/)<sup></sup>,
 [Tinghong Ye]()<sup></sup>,
 [Jin Wang]()<sup></sup>, 
 [Bo Tang]()<sup></sup>,
