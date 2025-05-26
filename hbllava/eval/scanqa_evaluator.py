@@ -132,9 +132,9 @@ def calc_scanqa_score(preds, gts, tokenizer, scorers):
             val_scores[f"[scanqa] {method}"] = score
     return val_scores
 
-pred_json = 'llava-3d-7b-scanqa_answer_val.json'
+pred_json = 'output/hbllava-0.5b-scanqa_answer_val.json'
 preds = [json.loads(q) for q in open(pred_json, "r")]
-gt_json = 'playground/data/annotations/llava3d_scanqa_val_answer.json'
+gt_json = 'data/gt_files/scannet/scanqa_temp_gt.json'
 gts = mmengine.load(gt_json)
 
 

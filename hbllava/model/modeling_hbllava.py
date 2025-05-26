@@ -211,8 +211,6 @@ class HBLlavaForConditionalGeneration(HBLlavaPreTrainedModel):
         
     def encode_scene(self, images):
         
-        
-        
         print('encoding---------------------------')
         exit(0)
         return None
