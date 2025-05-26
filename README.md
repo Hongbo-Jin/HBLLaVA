@@ -1,4 +1,4 @@
-<h2 align="center">ScanReasoner
+<h2 align="center">ScanReasoner: The first universal 3D reasoning framework
 </a>
 
 <h5 align="center">
