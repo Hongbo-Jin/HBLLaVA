@@ -83,18 +83,18 @@ dataset
 
 Download the base model from [HBLLaVA-Base](https://huggingface.co/Zhang199/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512).
 
-Replace data paths and model paths with yours in `scripts/train/train_qwen2_coldstart.sh`
+Replace data paths and model paths with yours in `scripts/train/coldstart.sh`
 
 ```bash
-bash scripts/train/train_qwen2_coldstart.sh
+bash scripts/train/coldstart.sh
 ```
 
 #### 2. GRPO Training
 
-Replace data paths and output_dir with yours in `scripts/train/train_qwen2_reason_nextqa.sh`
+Replace data paths and output_dir with yours in `scripts/train/reason.sh`
 
 ```bash
-bash scripts/train/train_qwen2_reason_nextqa.sh
+bash scripts/train/reason.sh
 ```
 
 ### 3. Evaluation
