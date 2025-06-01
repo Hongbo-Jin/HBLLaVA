@@ -14,7 +14,7 @@
 [Tuocheng Zeng]()<sup>2,✉</sup>
 
 
-<sup>1</sup>School of Computer Science, Peking University, Beijing, China<br>
+<sup>1</sup>School of Electronic and Computer Engineering, Peking University, Beijing, China<br>
 <sup>2</sup>Binjiang Research Institute, Zhejiang University, Hangzhou, China
 
 </div>
