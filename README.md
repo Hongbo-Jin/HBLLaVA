@@ -1,4 +1,4 @@
-<h2 align="center">ScanReasoner: The first universal 3D reasoning framework
+<h2 align="center">SpatialReasoner: The first universal 3D reasoning framework
 </a>
 
 <h5 align="center">
@@ -25,7 +25,7 @@
 - [2025-05] 🔊 Our [ScanReasoner](https://github.com/Hongbo-Jin/HBLLaVA) repository is released!
 
 ## <img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/256/2435/2435606.png"> About
-**ScanReasoner** is a universal 3D reasoning framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
+**SpatialReasoner** is a universal 3D reasoning framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
 The model and training process are fully traceable, ensuring reproducibility and reliability. This repository provides the model, code, and experimental setups for easy replication.
 
 
