@@ -14,15 +14,15 @@
 [Tuocheng Zeng]()<sup>2,✉</sup>
 
 
-<sup>1</sup>School of Electronic and Computer Engineering, Peking University, Beijing, China<br>
-<sup>2</sup>Binjiang Research Institute, Zhejiang University, Hangzhou, China
+<sup>1</sup>School of Electronic and Computer Engineering, Peking University<br>
+<sup>2</sup>Binjiang Research Institute, Zhejiang University
 
 </div>
 
 
 ## 📰 News
 
-- [2025-05] 🔊 Our [ScanReasoner](https://github.com/Hongbo-Jin/HBLLaVA) repository is released!
+- [2025-05] 🔊 Our [SpatialReasoner](https://github.com/Hongbo-Jin/HBLLaVA) repository is released!
 
 ## <img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/256/2435/2435606.png"> About
 **SpatialReasoner** is a universal 3D reasoning framework. It leverages reinforcement learning to enhance reasoning abilities while maintaining 3D perception ability. 
