@@ -25,7 +25,7 @@ def eval(args):
     
     for qa_sample in tqdm(qa_data):
         question=qa_sample['question']+" Answer the question using one word or one phrase."
-        scene_path=qa_sample['scene']
+        scene_path=args.data_folder+qa_sample['scene_id']
         scene_images_path=get_jpg_files_os(scene_path)[0:args.num_frame]
         
         messages = [
@@ -81,6 +81,7 @@ if __name__=="__main__":
     parser.add_argument("--model-path", type=str)
     parser.add_argument("--num-frame", type=int)
     parser.add_argument("--gt-file", type=str)
+    parser.add_argument("--data-folder", type=str)
 
     args = parser.parse_args()
     eval(args)
