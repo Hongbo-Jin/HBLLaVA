@@ -78,8 +78,8 @@ def eval(args):
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="ckpts/HBLLaVA-Coldstart-16")
-    parser.add_argument("--num-frame", type=int, default=16)
+    parser.add_argument("--model-path", type=str)
+    parser.add_argument("--num-frame", type=int)
     parser.add_argument("--gt-file", type=str)
 
     args = parser.parse_args()
