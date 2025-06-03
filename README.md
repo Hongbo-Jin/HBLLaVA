@@ -4,8 +4,8 @@
 <h5 align="center">
 <div align="center">
 
-[Hongbo Jin](https://hongbo-jin.github.io/)<sup></sup>,
-[Tinghong Ye]()<sup></sup>,
+[Hongbo Jin](https://hongbo-jin.github.io/)<sup>1*</sup>,
+[Tinghong Ye]()<sup>*</sup>,
 [Jin Wang]()<sup></sup>, 
 [Bo Tang]()<sup></sup>,
 [Yaochen Liu]()<sup></sup>,
