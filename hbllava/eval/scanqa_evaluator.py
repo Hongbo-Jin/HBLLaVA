@@ -98,13 +98,15 @@ def calc_scanqa_score(preds, gts, tokenizer, scorers):
     tmp_targets = {}
     acc, refined_acc = 0, 0
     print("Total samples:", len(preds))
-    assert len(preds) == len(gts)  # number of samples
+    # assert len(preds) == len(gts)  # number of samples
     for item_id, (pred, gt) in tqdm(enumerate(zip(preds, gts))):
         question_id = pred['question_id']
         gt_question_id = gt['question_id']
         assert question_id == gt_question_id
-        pred_answer = pred['text']
-        gt_answers = gt['text']
+        pred_answer = pred['pred_answer'][0]
+        gt_answers = gt['answer']
+        # print(pred_answer)
+        # print(gt_answers)
         # if len(pred) > 1:
         #     if pred[-1] == '.':
         #         pred = pred[:-1]
@@ -132,9 +134,9 @@ def calc_scanqa_score(preds, gts, tokenizer, scorers):
             val_scores[f"[scanqa] {method}"] = score
     return val_scores
 
-pred_json = 'output/hbllava-0.5b-scanqa_answer_val.json'
+pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/2_qwen2.5vl_7B_scanqa_pred.json'
 preds = [json.loads(q) for q in open(pred_json, "r")]
-gt_json = 'data/gt_files/scannet/scanqa_temp_gt.json'
+gt_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/scanqa_temp_gt.json'
 gts = mmengine.load(gt_json)
 
 

@@ -1,29 +1,32 @@
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+from hbllava.model import load_pretrained_model
 from qwen_vl_utils import process_vision_info
 import torch
 import json
 import shortuuid
 from tqdm import tqdm
+import argparse
+from hbllava.utils import get_jpg_files_os
 
-def eval():
+def eval(args):
     
-    ans_file = open("/mnt/cloud_disk/jhb/binjiang/SpatialReason/pred/5_qwen2.5vl_7B_scene0_ans.json", "w")
-
-    # default: Load the model on the available device(s)
-    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-        "/mnt/cloud_disk/public_ckpts/Qwen2.5-VL-7B-Instruct", 
-        torch_dtype="auto",
-        device_map="auto",
-    )
-    # default processer
-    processor = AutoProcessor.from_pretrained("/mnt/cloud_disk/public_ckpts/Qwen2.5-VL-7B-Instruct")
-    
+    fewshot_template="<Question>: The kitchen counter is located to the left of what? <Answer>: refrigerator \n<Question>: On what side of the red door is the refrigerator located? <Answer>: left \n<Question>: What color is the chair? <Answer>: brown"
     qa_data=[]
-    with open('/mnt/cloud_disk/jhb/binjiang/SpatialReason/output0512/scene0000_00_qa.json','r') as file:
+    with open(args.gt_file,'r') as file:
         qa_data=json.load(file)
     
+    ans_file = open(f"./output/{args.num_frame}_qwen2.5vl_7B_scanqa_pred.json", "w")
+
+    model, processor = load_pretrained_model(
+        model_name_or_path=args.model_path,
+        device_map="auto",
+        device="cuda",
+        torch_dtype="auto"
+    )
+    
     for qa_sample in tqdm(qa_data):
-        question=qa_sample['question']+"\nOnly select the best answer:"
+        question=qa_sample['question']+" Answer the question using one word or one phrase."
+        scene_path=qa_sample['scene']
+        scene_images_path=get_jpg_files_os(scene_path)[0:args.num_frame]
         
         messages = [
             {
@@ -31,13 +34,7 @@ def eval():
                 "content": [
                     {
                         "type": "video",
-                        "video": [
-                            "/mnt/cloud_disk/jhb/binjiang/SpatialReason/images/downsample_32_w_3d_features/posed_images/scene0000_00/0.jpg",
-                            "/mnt/cloud_disk/jhb/binjiang/SpatialReason/images/downsample_32_w_3d_features/posed_images/scene0000_00/174.jpg",
-                            "/mnt/cloud_disk/jhb/binjiang/SpatialReason/images/downsample_32_w_3d_features/posed_images/scene0000_00/348.jpg",
-                            "/mnt/cloud_disk/jhb/binjiang/SpatialReason/images/downsample_32_w_3d_features/posed_images/scene0000_00/522.jpg",
-                            "/mnt/cloud_disk/jhb/binjiang/SpatialReason/images/downsample_32_w_3d_features/posed_images/scene0000_00/696.jpg"
-                        ],
+                        "video": scene_images_path,
                     },
                     {"type": "text", "text": question},
                 ],
@@ -47,7 +44,7 @@ def eval():
         text = processor.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
-
+        # print(text)
         image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
         inputs = processor(
@@ -70,13 +67,21 @@ def eval():
         )
         
         ans_id = shortuuid.uuid()
-        ans_file.write(json.dumps({"question": question,
-                                   "answer":qa_sample['correct_letter'],
+        ans_file.write(json.dumps({
+                                   "question_id":qa_sample['question_id'],
+                                   "question": question,
+                                   "answer":qa_sample['answer'],
                                    "pred_answer": output_text,
                                    "metadata": {}}) + "\n")
         ans_file.flush()
     ans_file.close()
 
 if __name__=="__main__":
-    eval()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model-path", type=str, default="ckpts/HBLLaVA-Coldstart-16")
+    parser.add_argument("--num-frame", type=int, default=16)
+    parser.add_argument("--gt-file", type=str)
+
+    args = parser.parse_args()
+    eval(args)
     

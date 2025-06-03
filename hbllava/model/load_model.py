@@ -1,7 +1,8 @@
 import os
 import torch
 from collections import OrderedDict
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, BitsAndBytesConfig, \
+                            Qwen2_5_VLForConditionalGeneration, AutoProcessor
 
 from .modeling_hbllava import HBLlavaForConditionalGeneration
 from .configuration_hbllava import HBLlavaConfig
@@ -15,7 +16,28 @@ def load_base_ckp_for_lora(ckp_path):
     return new_ckp
     
 
-def load_pretrained_model(model_name_or_path, load_type='hf', load_8bit=False, load_4bit=False, device_map="auto",
+def load_pretrained_model(model_name_or_path, 
+                          device_map="auto",
+                          device="cuda", 
+                          torch_dtype="auto",
+                          **kwargs):
+    
+    if "qwen2.5-vl" in model_name_or_path.lower():
+        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+        model_name_or_path, 
+        torch_dtype=torch_dtype,
+        device_map=device_map)
+        print('loading qwen2.5')
+        processor= AutoProcessor.from_pretrained(model_name_or_path)
+
+        return model, processor
+    
+    context_len = getattr(model.config, 'max_sequence_length', 2048)
+    tokenizer = model.tokenizer
+    
+    return model, tokenizer, image_processor, context_len
+
+def load_pretrained_model_t(model_name_or_path, load_type='hf', load_8bit=False, load_4bit=False, device_map="auto",
                           device="cuda", **kwargs):
     kwargs = {"device_map": device_map, **kwargs}
     if device != "cuda":
