@@ -20,13 +20,28 @@ def load_pretrained_model(model_name_or_path,
                           device_map="auto",
                           device="cuda", 
                           torch_dtype="auto",
+                          load_8bit=False,
+                          load_4bit=False,
                           **kwargs):
-    
+    if load_8bit:
+        kwargs['load_in_8bit'] = True
+    elif load_4bit:
+        # kwargs['load_in_4bit'] = True
+        kwargs['quantization_config'] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type='nf4'
+        )
+    else:
+        kwargs['torch_dtype'] = torch.float16
+        
     if "qwen2.5-vl" in model_name_or_path.lower():
         model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         model_name_or_path, 
         torch_dtype=torch_dtype,
-        device_map=device_map)
+        device_map=device_map,
+        **kwargs)
         print('loading qwen2.5')
         processor= AutoProcessor.from_pretrained(model_name_or_path)
 

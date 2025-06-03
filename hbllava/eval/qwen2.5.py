@@ -20,11 +20,14 @@ def eval(args):
         model_name_or_path=args.model_path,
         device_map="auto",
         device="cuda",
-        torch_dtype="auto"
+        torch_dtype="auto",
+        load_8bit=False,
+        load_4bit=True
     )
     
     for qa_sample in tqdm(qa_data):
         question=qa_sample['question']+" Answer the question using one word or one phrase."
+        
         scene_path=args.data_folder+qa_sample['scene_id']
         scene_images_path=get_jpg_files_os(scene_path)[0:args.num_frame]
         
