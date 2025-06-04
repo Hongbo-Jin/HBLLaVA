@@ -37,7 +37,7 @@ def eval(args):
     )
     
     for qa_sample in tqdm(qa_data):
-        question=qa_sample['question']+" Answer the question using one word or one phrase."
+        question=qa_sample['question']+" Answer the question using a single word or phrase."
         
         scene_path=args.data_folder+qa_sample['scene_id']
         scene_images_path=get_jpg_files_os(scene_path)[0:args.num_frame]
