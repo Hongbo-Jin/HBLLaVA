@@ -33,8 +33,8 @@ def load_pretrained_model(model_name_or_path,
             bnb_4bit_use_double_quant=True,
             bnb_4bit_quant_type='nf4'
         )
-    else:
-        kwargs['torch_dtype'] = torch.float16
+    # else:
+    #     kwargs['torch_dtype'] = torch.float16
         
     if "qwen2.5-vl" in model_name_or_path.lower():
         model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
@@ -42,7 +42,7 @@ def load_pretrained_model(model_name_or_path,
         torch_dtype=torch_dtype,
         device_map=device_map,
         **kwargs)
-        print('loading qwen2.5')
+        print('loading qwen2.5-vl')
         processor= AutoProcessor.from_pretrained(model_name_or_path)
 
         return model, processor

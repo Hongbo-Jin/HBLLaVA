@@ -7,6 +7,18 @@ from tqdm import tqdm
 import argparse
 from hbllava.utils import get_jpg_files_os
 
+def downsample_frames(frames: list,factor=0.5):
+    
+    results=[]
+    for frame in frames[0]:
+        width, height = frame.size
+        new_width = int(width * factor)
+        new_height = int(height * factor)
+        resized_img = frame.resize((new_width, new_height))
+        results.append(resized_img)
+        
+    return [results]
+
 def eval(args):
     
     fewshot_template="<Question>: The kitchen counter is located to the left of what? <Answer>: refrigerator \n<Question>: On what side of the red door is the refrigerator located? <Answer>: left \n<Question>: What color is the chair? <Answer>: brown"
@@ -22,7 +34,7 @@ def eval(args):
         device="cuda",
         torch_dtype="auto",
         load_8bit=False,
-        load_4bit=True
+        load_4bit=False
     )
     
     for qa_sample in tqdm(qa_data):
@@ -50,6 +62,8 @@ def eval(args):
         # print(text)
         image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
+        video_inputs=downsample_frames(frames=video_inputs,factor=0.5)
+        
         inputs = processor(
             text=[text],
             images=image_inputs,
