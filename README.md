@@ -99,42 +99,17 @@ bash scripts/train/reason.sh
 
 ### 3. Evaluation
 
-We currently provide evaluations on 4 benchmarks, including [Video-MME](https://video-mme.github.io/home_page.html#leaderboard), [MVBench](https://huggingface.co/datasets/OpenGVLab/MVBench), [MLVU](https://github.com/JUNJIE99/MLVU), [MMVU](https://github.com/yale-nlp/MMVU).
+We currently provide evaluations on 2 benchmarks, including [ScanQA](https://github.com/ATR-DBI/ScanQA) and [SQA3D](https://zenodo.org/records/7792397#.ZCkprfFBx3g)
 
 #### Video-MME
 
-1. Download [Video-MME](https://huggingface.co/datasets/lmms-lab/Video-MME) and put it under ``path/to/your/dataset/eval/Video-MME``.
-2. Please change ``MODEL_PATH``, ``MODEL_NAME``, ``EVAL_DIR``, ``conv-mode`` and ``duration`` in ``scripts/eval/videomme.sh``. There are three types of ``duration`` available for testing: ``short``, ``medium``, and ``long``.
+1. Download [Scannet](https://github.com/ScanNet/ScanNet) and put it under ``path/to/your/dataset/Scannet``.
+2. Please change ``model-path``, ``num-frame``, ``gt-file`` and ``data-folder`` in ``scripts/eval/qwen2.5.sh``.
 3. Please use the following command for single-gpu inference.
    ```bash
-   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/videomme.sh
+   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/qwen2.5.sh
    ```
 
-#### MVBench
-
-1. Download [MVBench](https://huggingface.co/datasets/OpenGVLab/MVBench) and put it under ``path/to/your/dataset/eval/MVBench``.
-2. Please change ``MODEL_PATH``, ``MODEL_NAME``, ``EVAL_DIR`` and ``conv-mode`` in ``scripts/eval/mvbench.sh``.
-3. Please use the following command for single-gpu inference.
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/mvbench.sh
-   ```
-
-#### MLVU
-
-1. Download [MLVU](https://huggingface.co/datasets/MLVU/MVLU) and put it under ``path/to/your/dataset/eval/MLVU``.
-2. Please change ``MODEL_PATH``, ``MODEL_NAME``, ``EVAL_DIR`` and ``conv-mode`` in ``scripts/eval/mlvu.sh``.
-3. Please use the following command for single-gpu inference.
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/mlvu.sh
-   ```
-
-#### MMVU
-
-1. Download [MMVU](https://huggingface.co/datasets/yale-nlp/MMVU) and put it under ``path/to/your/dataset/eval/MMVU``.
-2. Please change ``MODEL_PATH``, ``MODEL_NAME``, ``EVAL_DIR`` and ``conv-mode`` in ``scripts/eval/mmvu.sh``.
-3. Please use the following command for single-gpu inference.
-   ```bash
-   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/mmvu.sh
 
 ### Quick Inference Scripts
 
@@ -154,7 +129,3 @@ If you find our work interesting and helpful, please consider giving our repo a 
 ## 📨 Contact
 
 If you have any questions or suggestions, please feel free to contact us at ``hongbo@hust.edu.cn``.
-
-## ❤️ Community efforts
-* This repository is based on [TinyLLaVA-Video](https://github.com/ZhangXJ199/TinyLLaVA-Video) project.
-* The implementation of the GRPO algorithm refers to the [open-r1-multimodal](https://github.com/EvolvingLMMs-Lab/open-r1-multimodal) project. Great work!

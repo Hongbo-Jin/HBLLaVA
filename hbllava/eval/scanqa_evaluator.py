@@ -134,11 +134,10 @@ def calc_scanqa_score(preds, gts, tokenizer, scorers):
             val_scores[f"[scanqa] {method}"] = score
     return val_scores
 
-pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/llava3d_scanqa_val_pred.json'
+pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/20_qwen2.5vl_7B_scanqa_pred.json'
 preds = [json.loads(q) for q in open(pred_json, "r")]
 gt_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/scanqa_temp_gt.json'
 gts = mmengine.load(gt_json)
-
 
 val_scores = calc_scanqa_score(preds, gts, tokenizer, scorers)
 print(val_scores)
