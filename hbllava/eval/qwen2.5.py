@@ -26,7 +26,7 @@ def eval(args):
     with open(args.gt_file,'r') as file:
         qa_data=json.load(file)
     
-    ans_file = open(f"./output/{args.num_frame}_qwen2.5vl_7B_scanqa_pred.json", "w")
+    ans_file = open(args.answer_file, "w")
 
     model, processor = load_pretrained_model(
         model_name_or_path=args.model_path,
@@ -99,6 +99,7 @@ if __name__=="__main__":
     parser.add_argument("--num-frame", type=int)
     parser.add_argument("--gt-file", type=str)
     parser.add_argument("--data-folder", type=str)
+    parser.add_argument("--answer-file", type=str)
 
     args = parser.parse_args()
     eval(args)
