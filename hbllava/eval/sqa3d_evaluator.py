@@ -91,18 +91,17 @@ def answer_match(pred, gts):
             return 0, 1
     return 0, 0
 
-def calc_scanqa_score(preds, tokenizer, scorers):
+def calc_sqa3d_score(preds, tokenizer, scorers):
     val_scores = {}
     tmp_preds = {}
     tmp_targets = {}
     acc, refined_acc = 0, 0
     print("Total samples:", len(preds))
-   
     for item_id, pred in tqdm(enumerate(preds)):
-        question_id = pred['question_id']
+        
         pred_answer = pred['pred_answer'][0]
-        gt_answers = pred['answer']
-     
+        gt_answers = [pred['answer']]
+ 
         pred_answer = clean_answer(pred_answer)
         ref_captions = [clean_answer(gt_answer) for gt_answer in gt_answers]
         tmp_acc, tmp_refined_acc = answer_match(pred_answer, ref_captions)
@@ -126,8 +125,8 @@ def calc_scanqa_score(preds, tokenizer, scorers):
             val_scores[f"[scanqa] {method}"] = score
     return val_scores
 
-pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/8_Qwen2.5-VL-3B-Instruct_scanqa.json'
+pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/8_qwen2.5vl_7B_sqa3d.json'
 preds = [json.loads(q) for q in open(pred_json, "r")]
 
-val_scores = calc_scanqa_score(preds, tokenizer, scorers)
+val_scores = calc_sqa3d_score(preds, tokenizer, scorers)
 print(val_scores)
