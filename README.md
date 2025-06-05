@@ -101,15 +101,22 @@ bash scripts/train/reason.sh
 
 We currently provide evaluations on 2 benchmarks, including [ScanQA](https://github.com/ATR-DBI/ScanQA) and [SQA3D](https://zenodo.org/records/7792397#.ZCkprfFBx3g)
 
-#### Video-MME
+#### ScanQA
 
 1. Download [Scannet](https://github.com/ScanNet/ScanNet) and put it under ``path/to/your/dataset/Scannet``.
-2. Please change ``model-path``, ``num-frame``, ``gt-file`` and ``data-folder`` in ``scripts/eval/qwen2.5.sh``.
-3. Please use the following command for single-gpu inference.
+2. Please change ``model-path``, ``num-frame``, ``gt-file`` and ``data-folder`` in ``scripts/eval/eval_scanqa.sh``.
+3. Please use the following command for inference.
    ```bash
-   CUDA_VISIBLE_DEVICES=0 bash scripts/eval/qwen2.5.sh
+   bash scripts/eval/eval_scanqa.sh
    ```
+#### SQA3D
 
+1. Download SQA3D gt files from its [official website](https://zenodo.org/records/7792397#.ZCkprfFBx3g).
+2. Please change ``model-path``, ``num-frame``, ``gt-file`` and ``data-folder`` in ``scripts/eval/eval_sqa3d.sh``.
+3. Please use the following command for inference.
+   ```bash
+   bash scripts/eval/eval_sqa3d.sh
+   ```
 
 ### Quick Inference Scripts
 
