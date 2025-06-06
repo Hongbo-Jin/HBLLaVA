@@ -125,7 +125,7 @@ def calc_sqa3d_score(preds, tokenizer, scorers):
             val_scores[f"[scanqa] {method}"] = score
     return val_scores
 
-pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/8_qwen2.5vl_7B_sqa3d.json'
+pred_json = '/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/8_Qwen2.5-VL-3B-Instruct_sqa3d.json'
 preds = [json.loads(q) for q in open(pred_json, "r")]
 
 val_scores = calc_sqa3d_score(preds, tokenizer, scorers)

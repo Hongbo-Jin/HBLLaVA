@@ -9,12 +9,14 @@ if TYPE_CHECKING:
 @dataclass
 class ModelArguments:
     cache_dir: Optional[str] = field(default=None)
+    model_name_or_path: Optional[str] = field(default="Qwen/Qwen2.5")
+    tune_mm_vision: Optional[bool] = field(default=False)
+    tune_mm_mlp: Optional[bool] = field(default=True)
+    tune_mm_llm: Optional[bool] = field(default=False)
     
-    model_name_or_path: Optional[str] = field(default="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
     tokenizer_name_or_path: Optional[str] = field(default=None)
     attn_implementation: Optional[str] = field(default=None)
     vision_tower: Optional[str] = field(default='')
-    vision_tower2: Optional[str] = field(default='')
     connector_type: str = field(default='linear')
     
     mm_vision_select_layer: Optional[int] = field(default=-1)  # default to the last layer
@@ -52,12 +54,16 @@ class DataArguments:
 
 @dataclass
 class TrainingArguments(transformers.TrainingArguments):
+    
+    bf16: bool = field(default=False)
+    gradient_checkpointing: bool = field(default=False)
+     
     training_recipe: str = field(default='common')
-    tune_type_llm: str = field(default="frozen") # support only: frozen, full, lora, qlora_int4, qlora_int8
-    tune_type_vision_tower: str = field(default="frozen") # support only: frozen, full, partially-tune
-    tune_vision_tower_from_layer: Optional[int] = field(default=10)
-    tune_type_connector: str = field(default="full") # support only: frozen, full
-    tune_embed_tokens: Optional[int] = field(default=False)
+    # tune_type_llm: str = field(default="frozen") # support only: frozen, full, lora, qlora_int4, qlora_int8
+    # tune_type_vision_tower: str = field(default="frozen") # support only: frozen, full, partially-tune
+    # tune_vision_tower_from_layer: Optional[int] = field(default=10)
+    # tune_type_connector: str = field(default="full") # support only: frozen, full
+    # tune_embed_tokens: Optional[int] = field(default=False)
     
     optim: str = field(default="adamw_torch")
     remove_unused_columns: bool = field(default=False)
