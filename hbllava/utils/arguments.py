@@ -41,6 +41,10 @@ class ModelArguments:
 class DataArguments:
     data_path: str = field(default=None, metadata={"help": "Path to the training data."})
     data_folder: Optional[str] = field(default=None)
+    sampling_rate: Optional[int]=field(default=1)
+    max_pixels: int = field(default=28 * 28 * 576)
+    min_pixels: int = field(default=28 * 28 * 16)
+    
     image_data_path: str = field(default=None, metadata={"help": "Path to the training data."})
     image_folder: Optional[str] = field(default=None)
     video_data_path: str = field(default=None, metadata={"help": "Path to the training data."})
@@ -57,7 +61,7 @@ class TrainingArguments(transformers.TrainingArguments):
     
     bf16: bool = field(default=False)
     gradient_checkpointing: bool = field(default=False)
-     
+    output_dir: str = field(default='./output')
     training_recipe: str = field(default='common')
     # tune_type_llm: str = field(default="frozen") # support only: frozen, full, lora, qlora_int4, qlora_int8
     # tune_type_vision_tower: str = field(default="frozen") # support only: frozen, full, partially-tune

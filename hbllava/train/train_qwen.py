@@ -7,6 +7,8 @@ from hbllava.utils import (
     DataArguments,
     TrainingArguments,
 )
+from hbllava.data.data_qwen import make_supervised_data_module
+from transformers import Trainer
 
 def set_model(model_args, model):
     if model_args.tune_mm_vision:
@@ -60,26 +62,21 @@ def train(attn_implementation="flash_attention_2"):
 
             model.get_input_embeddings().register_forward_hook(make_inputs_require_grad)
             
-    image_processor=processor.image_processor
+    data_args.image_processor=processor.image_processor
+    data_args.model_type = "qwen2.5vl"
     tokenizer=processor.tokenizer   
    
-   
-    data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
-
     set_model(model_args, model)
     
-        
-    print('train finished')
+    data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
+    
+    trainer = Trainer(
+        model=model, processing_class=tokenizer, args=training_args, **data_module
+    )
+    
+    
     return None
 
 
 if __name__=="__main__":
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("--model-path", type=str)
-    # parser.add_argument("--num-frame", type=int)
-    # parser.add_argument("--gt-file", type=str)
-    # parser.add_argument("--data-folder", type=str)
-    # parser.add_argument("--bf16", type=bool, default=True)
-
-    # args = parser.parse_args()
     train(attn_implementation="flash_attention_2")
