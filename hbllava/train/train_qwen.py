@@ -9,6 +9,8 @@ from hbllava.utils import (
 )
 from hbllava.data.data_qwen import make_supervised_data_module
 from transformers import Trainer
+import logging
+import pathlib
 
 def set_model(model_args, model):
     if model_args.tune_mm_vision:
@@ -70,11 +72,18 @@ def train(attn_implementation="flash_attention_2"):
     
     data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
     
+    training_args.report_to = "none"
     trainer = Trainer(
         model=model, processing_class=tokenizer, args=training_args, **data_module
     )
     
+    if list(pathlib.Path(training_args.output_dir).glob("checkpoint-*")):
+        logging.info("checkpoint found, resume training")
+        trainer.train(resume_from_checkpoint=True)
+    else:
+        trainer.train()
     
+    print('train finished')
     return None
 
 

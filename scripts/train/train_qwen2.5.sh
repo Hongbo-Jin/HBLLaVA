@@ -1,5 +1,5 @@
 
-NUM_frame=20
+NUM_frame=10
 model_name='Qwen2.5-VL-3B-Instruct'
 output_dir=""
 

@@ -20,6 +20,7 @@ from torch.utils.data import Dataset
 from PIL import Image
 from decord import VideoReader
 import transformers
+from hbllava.utils import get_jpg_files_os
 
 # from . import data_list
 # from .rope2d import get_rope_index_25, get_rope_index_2
@@ -341,6 +342,7 @@ class LazySupervisedDataset(Dataset):
     def _get_item(self, i) -> Dict[str, torch.Tensor]:
         
         sources = self.list_data_dict[i]
+        
         if isinstance(i, int):
             sources = [sources]
         assert len(sources) == 1, "Don't know why it is wrapped to a list"  # FIXME
@@ -410,6 +412,22 @@ class LazySupervisedDataset(Dataset):
                 merged_thw.prod() // self.data_args.image_processor.merge_size**2
                 for merged_thw in video_grid_thw_merged
             ]
+        if 'scene_id' in sources[0]:
+            print(sources[0])
+            scene_path=os.path.join(self.data_args.data_folder,sources[0]['scene_id'])
+            image_paths=get_jpg_files_os(scene_path)[0:self.data_args.num_frame]
+            
+            images=[]
+            grid_thws=[]
+            for img_path in image_paths:
+                image, grid_thw = self.process_image_unified(img_path)
+                print(f'image:{image.shape}')
+                print(f'grid thw: {grid_thw}')
+                exit(0)
+                images.append(image)
+                grid_thws.append(grid_thw)
+            exit(0) 
+        
         chat_sources = copy.deepcopy([e["conversations"] for e in sources])
         data_dict = preprocess_qwen_2_visual(
             chat_sources,
