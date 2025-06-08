@@ -45,6 +45,7 @@ class DataArguments:
     max_pixels: int = field(default=28 * 28 * 576)
     min_pixels: int = field(default=28 * 28 * 16)
     num_frame: int = field(default=16)
+    model_type: str = field(default="qwen2.5")
     
     image_data_path: str = field(default=None, metadata={"help": "Path to the training data."})
     image_folder: Optional[str] = field(default=None)

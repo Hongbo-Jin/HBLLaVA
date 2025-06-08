@@ -23,7 +23,7 @@ import transformers
 from hbllava.utils import get_jpg_files_os
 
 # from . import data_list
-# from .rope2d import get_rope_index_25, get_rope_index_2
+from .rope2d import get_rope_index_25, get_rope_index_2
 
 IGNORE_INDEX = -100
 IMAGE_TOKEN_INDEX = 151655
@@ -50,6 +50,7 @@ def preprocess_qwen_2_visual(
     grid_thw_image: List = [],
     grid_thw_video: List = [],
 ) -> Dict:
+    
     roles = {"human": "user", "gpt": "assistant"}
     system_message = "You are a helpful assistant."
 
@@ -60,22 +61,23 @@ def preprocess_qwen_2_visual(
     visual_replicate_index_image = 0
     visual_replicate_index_video = 0
     input_ids, targets = [], []
-
+    
     for i, source in enumerate(sources):
         try:
             if roles[source[0]["from"]] != roles["human"]:
                 source = source[1:]
         except:
             print(sources)
-
+        
         input_id, target = [], []
 
         input_id += tokenizer.apply_chat_template(
             [{"role": "system", "content": system_message}]
         )
         target += [IGNORE_INDEX] * len(input_id)
-
+        
         for conv in source:
+        
             try:
                 role = conv["role"]
                 content = conv["content"]
@@ -84,6 +86,7 @@ def preprocess_qwen_2_visual(
                 content = conv["value"]
 
             role = roles.get(role, role)
+           
             if role == "user":
                 if "<image>" in content:
                     parts = content.split("<image>")
@@ -100,7 +103,9 @@ def preprocess_qwen_2_visual(
                         visual_replicate_index_image += 1
                     new_parts.append(parts[-1])
                     content = "".join(new_parts)
-
+                    # print(f'content:{content.count("image_pad")}')
+                    # print(len(content))
+                    # exit(0)
                 if "<video>" in content:
                     parts = content.split("<video>")
                     new_parts = []
@@ -116,9 +121,12 @@ def preprocess_qwen_2_visual(
                         visual_replicate_index_video += 1
                     new_parts.append(parts[-1])
                     content = "".join(new_parts)
-
+                    # print(f'content:{content.count("video_pad")}')
+                    # print(len(content))
+                    # exit(0)
             conv = [{"role": role, "content": content}]
             encode_id = tokenizer.apply_chat_template(conv)
+            
             input_id += encode_id
             if role in ["user", "system"]:
                 target += [IGNORE_INDEX] * len(encode_id)
@@ -156,11 +164,11 @@ class LazySupervisedDataset(Dataset):
             data_args, "video_min_total_pixels", 256 * 28 * 28
         )
         self.sampling_rate=getattr(data_args,"sampling_rate",1)
-        # self.model_type = data_args.model_type
-        # if data_args.model_type == "qwen2.5vl":
-        #     self.get_rope_index = get_rope_index_25
-        # else:
-        #     self.get_rope_index = get_rope_index_2
+        self.model_type = data_args.model_type
+        if data_args.model_type == "qwen2.5vl":
+            self.get_rope_index = get_rope_index_25
+        else:
+            self.get_rope_index = get_rope_index_2
         list_data_dict=json.load(open(dataset,'r'))
         ori_length=len(list_data_dict)
         list_data_dict=list_data_dict[0:ori_length//self.sampling_rate]
@@ -215,13 +223,17 @@ class LazySupervisedDataset(Dataset):
 
     def process_image_unified(self, image_file):
         processor = copy.deepcopy(self.data_args.image_processor)
+        
         image = Image.open(image_file).convert("RGB")
-
+ 
         visual_processed = processor.preprocess(image, return_tensors="pt")
+        
         image_tensor = visual_processed["pixel_values"]
+        
         if isinstance(image_tensor, List):
             image_tensor = image_tensor[0]
         grid_thw = visual_processed["image_grid_thw"][0]
+       
         return image_tensor, grid_thw
 
     def process_video(self, video_file):
@@ -412,39 +424,65 @@ class LazySupervisedDataset(Dataset):
                 merged_thw.prod() // self.data_args.image_processor.merge_size**2
                 for merged_thw in video_grid_thw_merged
             ]
-        if 'scene_id' in sources[0]:
-            print(sources[0])
+        elif 'scene_id' in sources[0]:
+            
             scene_path=os.path.join(self.data_args.data_folder,sources[0]['scene_id'])
             image_paths=get_jpg_files_os(scene_path)[0:self.data_args.num_frame]
+
+            results = [self.process_image_unified(file) for file in image_paths]
+            image, grid_thw = zip(*results)
             
-            images=[]
-            grid_thws=[]
-            for img_path in image_paths:
-                image, grid_thw = self.process_image_unified(img_path)
-                print(f'image:{image.shape}')
-                print(f'grid thw: {grid_thw}')
-                exit(0)
-                images.append(image)
-                grid_thws.append(grid_thw)
-            exit(0) 
+            for img_idx in range(len(image)-1):
+                sources[0]['conversations'][0]['value']='<image>\n'+sources[0]['conversations'][0]['value']
+            # print(sources[0])
+            
+            grid_thw_merged = copy.deepcopy(grid_thw)
+            if not isinstance(grid_thw, Sequence):
+                grid_thw_merged = [grid_thw_merged]
+                grid_thw = [grid_thw]
+                
+            grid_thw_merged = [
+                merged_thw.prod() // self.data_args.image_processor.merge_size**2
+                for merged_thw in grid_thw_merged
+            ]
+            # images=[]
+            # grid_thws=[]
+            # for img_path in image_paths:
+            #     image, grid_thw = self.process_image_unified(img_path)
+            #     images.append(image)
+            #     grid_thws.append(grid_thw)
+           
+            # print(sources[0])
+            # video_grid_thw_merged = copy.deepcopy(grid_thws[0])
+            # video_grid_thw_merged[0]=video_grid_thw_merged[0]*len(grid_thws)
+            # video_grid_thw_merged=[video_grid_thw_merged]
+           
+            # video_grid_thw_merged = [
+            #     merged_thw.prod() // self.data_args.image_processor.merge_size**2
+            #     for merged_thw in video_grid_thw_merged
+            # ]
         
         chat_sources = copy.deepcopy([e["conversations"] for e in sources])
+   
         data_dict = preprocess_qwen_2_visual(
             chat_sources,
             self.tokenizer,
             grid_thw_image=grid_thw_merged if grid_thw_merged else None,
             grid_thw_video=video_grid_thw_merged if video_grid_thw_merged else None,
         )
+        
         position_ids, _ = self.get_rope_index(
             self.data_args.image_processor.merge_size,
             data_dict["input_ids"],
             image_grid_thw=torch.stack(grid_thw, dim=0) if grid_thw else None,
+            # image_grid_thw= None,
             video_grid_thw=(
                 torch.stack(video_grid_thw, dim=0) if video_grid_thw else None
             ),
             second_per_grid_ts=second_per_grid_ts if second_per_grid_ts else None,
         )
-        if "image" not in sources[0] and "video" not in sources[0]:
+        
+        if "image" not in sources[0] and "video" not in sources[0] and "scene_id" not in sources[0]:
             grid_thw_merged = None
             sources = copy.deepcopy([e["conversations"] for e in sources])
             data_dict = preprocess_qwen_2_visual(
@@ -471,7 +509,12 @@ class LazySupervisedDataset(Dataset):
             data_dict["video_grid_thw"] = torch.cat(
                 [thw.unsqueeze(0) for thw in video_grid_thw], dim=0
             )
-
+        elif "scene_id" in self.list_data_dict[i]:
+            data_dict["pixel_values"] = torch.cat(image, dim=0)
+            data_dict["image_grid_thw"] = torch.cat(
+                [thw.unsqueeze(0) for thw in grid_thw], dim=0
+            )
+      
         return data_dict
 
 
