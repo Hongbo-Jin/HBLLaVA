@@ -1,5 +1,7 @@
 
-NUM_frame=2
+export CUDA_VISIBLE_DEVICES=1,2,3
+
+NUM_frame=1
 model_name='Qwen2.5-VL-3B-Instruct'
 output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts"
 
@@ -18,5 +20,5 @@ python hbllava/train/train_qwen.py \
     --output_dir ${output_dir} \
     --model_type "qwen2.5vl" \
     --downsample True \
-    --downsample_rate 2 \
+    --downsample_rate 20 \
     --flash_attn False \

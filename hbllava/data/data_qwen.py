@@ -227,8 +227,8 @@ class LazySupervisedDataset(Dataset):
         image = Image.open(image_file).convert("RGB")
         if downsample:
             width, height = image.size
-            new_width = width // 2
-            new_height = height // 2
+            new_width = width // downsample_rate
+            new_height = height // downsample_rate
             image=image.resize((new_width, new_height))
             
         visual_processed = processor.preprocess(image, return_tensors="pt")
@@ -238,7 +238,7 @@ class LazySupervisedDataset(Dataset):
         if isinstance(image_tensor, List):
             image_tensor = image_tensor[0]
         grid_thw = visual_processed["image_grid_thw"][0]
-       
+      
         return image_tensor, grid_thw
 
     def process_video(self, video_file):
