@@ -56,29 +56,27 @@ pip install -e .
 ## 📌 Usage
 
 ### 1. Data Preparation
-We select multiple choice questions from the NextQA subset of [LLaVA-Video-178K](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K) as training data. To maintain manageable training time with limited computational resources, we only choose the subset of data with a duration of 0 to 30 seconds, which contains 5,496 samples. The training data can be downloaded from [here](https://huggingface.co/datasets/Zhang199/TinyLLaVA-Video-R1-training-data).
+The training data is based on scannet dataset, which can be downloaded from [here](https://huggingface.co/datasets/YiquanLi/ScanNet_for_ScanQA_SQA3D)
 
 #### Organize Data
 
 Organize the files and annotation files as follows in ``path/to/your/dataset``:
 
 ```Shell
-dataset
+data
+├── Scannet
+│   ├── downsample_32
+├── ├── ScanQA-v1.0
 ├── NextQA
-│   ├── NExTVideo
-├── nextqa_0-30s.jsonl
-├── nextqa-coldstart-16.json
+├── 
 ```
 
 ### 2. Train
 
 #### 1. Cold Start
 
-**Option1**: You can directly download [HBLLaVA-ColdStart](https://huggingface.co/Zhang199/TinyLLaVA-Video-Coldstart_NextQA_16).
-
-**Option2**: You can train the model yourself: 
-
-Download the base model from [HBLLaVA-Base](https://huggingface.co/Zhang199/TinyLLaVA-Video-Qwen2.5-3B-Group-16-512).
+You can train the model yourself: 
+Download [Qwen2.5-vl-3B-instruct](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct) as base model.
 
 Replace data paths and model paths with yours in `scripts/train/coldstart.sh`
 
