@@ -1,7 +1,7 @@
 
-NUM_frame=3
+NUM_frame=10
 model_name='Qwen2.5-VL-3B-Instruct'
-output_dir=""
+output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts"
 
 python hbllava/train/train_qwen.py \
     --model_name_or_path /mnt/cloud_disk/public_ckpts/Qwen2.5-VL-3B-Instruct \
@@ -15,5 +15,5 @@ python hbllava/train/train_qwen.py \
     --tune_mm_llm False \
     --sampling_rate 2 \
     --num-frame ${NUM_frame} \
-    --output_dir /mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts \
+    --output_dir ${output_dir} \
     --model_type "qwen2.5vl" \

@@ -4,18 +4,15 @@
 <h5 align="center">
 <div align="center">
 
-[Hongbo Jin](https://hongbo-jin.github.io/)<sup>1*</sup>,
+[Hongbo Jin](https://hongbo-jin.github.io/)<sup></sup>,
 [Tinghong Ye]()<sup>*</sup>,
 [Yaochen Liu]()<sup></sup>,
 [Bo Tang]()<sup></sup>,
 [Jin Wang]()<sup></sup>, 
 [Binye Liu](https://github.com/Xjtulby)<sup></sup>,
-[Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>1,✉</sup>
-[Tuocheng Zeng]()<sup>2,✉</sup>
+[Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>✉</sup>
 
-
-<sup>1</sup>School of Electronic and Computer Engineering, Peking University<br>
-<sup>2</sup>Binjiang Research Institute, Zhejiang University
+<sup></sup>School of Electronic and Computer Engineering, Peking University<br>
 
 </div>
 
