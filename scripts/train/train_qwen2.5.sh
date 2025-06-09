@@ -19,3 +19,4 @@ python hbllava/train/train_qwen.py \
     --model_type "qwen2.5vl" \
     --downsample True \
     --downsample_rate 2 \
+    --flash_attn False \

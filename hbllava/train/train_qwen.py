@@ -37,7 +37,7 @@ def set_model(model_args, model):
         model.lm_head.requires_grad = False
 
 
-def train(attn_implementation="flash_attention_2"):
+def train():
     
     parser = transformers.HfArgumentParser(
         (ModelArguments, DataArguments, TrainingArguments)
@@ -51,7 +51,7 @@ def train(attn_implementation="flash_attention_2"):
         torch_dtype=(torch.bfloat16 if training_args.bf16 else None),
         load_8bit=False,
         load_4bit=False,
-        # attn_implementation=attn_implementation,
+        attn_implementation="flash_attention_2" if training_args.flash_attn else None,
         cache_dir=model_args.cache_dir
     )
     
@@ -88,4 +88,4 @@ def train(attn_implementation="flash_attention_2"):
 
 
 if __name__=="__main__":
-    train(attn_implementation="flash_attention_2")
+    train()

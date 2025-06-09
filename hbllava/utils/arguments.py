@@ -67,6 +67,7 @@ class TrainingArguments(transformers.TrainingArguments):
     gradient_checkpointing: bool = field(default=False)
     output_dir: str = field(default='./output')
     training_recipe: str = field(default='common')
+    flash_attn: bool = field(default=False)
     
     # tune_type_llm: str = field(default="frozen") # support only: frozen, full, lora, qlora_int4, qlora_int8
     # tune_type_vision_tower: str = field(default="frozen") # support only: frozen, full, partially-tune
