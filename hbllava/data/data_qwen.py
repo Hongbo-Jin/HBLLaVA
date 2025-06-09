@@ -221,11 +221,16 @@ class LazySupervisedDataset(Dataset):
             print("No pre-calculated length available.")
             return np.array([1] * len(self.list_data_dict))
 
-    def process_image_unified(self, image_file):
+    def process_image_unified(self, image_file, downsample=False,downsample_rate=1.0):
         processor = copy.deepcopy(self.data_args.image_processor)
         
         image = Image.open(image_file).convert("RGB")
- 
+        if downsample:
+            width, height = image.size
+            new_width = width // 2
+            new_height = height // 2
+            image=image.resize((new_width, new_height))
+            
         visual_processed = processor.preprocess(image, return_tensors="pt")
         
         image_tensor = visual_processed["pixel_values"]
@@ -429,7 +434,7 @@ class LazySupervisedDataset(Dataset):
             scene_path=os.path.join(self.data_args.data_folder,sources[0]['scene_id'])
             image_paths=get_jpg_files_os(scene_path)[0:self.data_args.num_frame]
 
-            results = [self.process_image_unified(file) for file in image_paths]
+            results = [self.process_image_unified(file,downsample=self.data_args.downsample,downsample_rate=self.data_args.downsample_rate) for file in image_paths]
             image, grid_thw = zip(*results)
             
             for img_idx in range(len(image)-1):

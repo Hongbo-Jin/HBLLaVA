@@ -46,6 +46,9 @@ class DataArguments:
     min_pixels: int = field(default=28 * 28 * 16)
     num_frame: int = field(default=16)
     model_type: str = field(default="qwen2.5")
+    downsample: bool = False
+    downsample_rate: int =field(default=1.0)
+    
     
     image_data_path: str = field(default=None, metadata={"help": "Path to the training data."})
     image_folder: Optional[str] = field(default=None)
