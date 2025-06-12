@@ -37,6 +37,21 @@ def set_model(model_args, model):
         model.lm_head.requires_grad = False
 
 
+def safe_save_model_for_hf_trainer(trainer: transformers.Trainer, output_dir: str):
+    """Collects the state dict and dump to disk."""
+
+    if trainer.deepspeed:
+        torch.cuda.synchronize()
+        trainer.save_model(output_dir)
+        return
+
+    state_dict = trainer.model.state_dict()
+    if trainer.args.should_save:
+        cpu_state_dict = {key: value.cpu() for key, value in state_dict.items()}
+        del state_dict
+        trainer._save(output_dir, state_dict=cpu_state_dict)  # noqa
+
+
 def train():
     
     parser = transformers.HfArgumentParser(
@@ -83,6 +98,11 @@ def train():
     else:
         trainer.train()
     
+    trainer.save_state()
+    data_args.image_processor.save_pretrained(training_args.output_dir)
+    model.config.use_cache = True
+    safe_save_model_for_hf_trainer(trainer=trainer, output_dir=training_args.output_dir)
+
     print('train finished')
     return None
 

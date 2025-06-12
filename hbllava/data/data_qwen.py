@@ -93,6 +93,10 @@ def preprocess_qwen_2_visual(
                     new_parts = []
                     for i in range(len(parts) - 1):
                         new_parts.append(parts[i])
+                        # print(f'debug grid thw image:{grid_thw_image}----visual_replicate_index_image:{visual_replicate_index_image}')
+                        # if visual_replicate_index_image>=len(grid_thw_image):
+                        #     print(f'content:{content}')
+                        #     print(f'parts{parts}')
                         replacement = (
                             "<|vision_start|>"
                             + f"<|image_pad|>"
@@ -106,7 +110,7 @@ def preprocess_qwen_2_visual(
                     # print(f'content:{content.count("image_pad")}')
                     # print(len(content))
                     # exit(0)
-                if "<video>" in content:
+                elif "<video>" in content:
                     parts = content.split("<video>")
                     new_parts = []
                     for i in range(len(parts) - 1):
@@ -433,12 +437,10 @@ class LazySupervisedDataset(Dataset):
             
             scene_path=os.path.join(self.data_args.data_folder,sources[0]['scene_id'])
             image_paths=get_jpg_files_os(scene_path)[0:self.data_args.num_frame]
-
+            
             results = [self.process_image_unified(file,downsample=self.data_args.downsample,downsample_rate=self.data_args.downsample_rate) for file in image_paths]
             image, grid_thw = zip(*results)
             
-            for img_idx in range(len(image)-1):
-                sources[0]['conversations'][0]['value']='<image>\n'+sources[0]['conversations'][0]['value']
             # print(sources[0])
             
             grid_thw_merged = copy.deepcopy(grid_thw)
@@ -450,31 +452,20 @@ class LazySupervisedDataset(Dataset):
                 merged_thw.prod() // self.data_args.image_processor.merge_size**2
                 for merged_thw in grid_thw_merged
             ]
-            # images=[]
-            # grid_thws=[]
-            # for img_path in image_paths:
-            #     image, grid_thw = self.process_image_unified(img_path)
-            #     images.append(image)
-            #     grid_thws.append(grid_thw)
            
-            # print(sources[0])
-            # video_grid_thw_merged = copy.deepcopy(grid_thws[0])
-            # video_grid_thw_merged[0]=video_grid_thw_merged[0]*len(grid_thws)
-            # video_grid_thw_merged=[video_grid_thw_merged]
-           
-            # video_grid_thw_merged = [
-            #     merged_thw.prod() // self.data_args.image_processor.merge_size**2
-            #     for merged_thw in video_grid_thw_merged
-            # ]
         
         chat_sources = copy.deepcopy([e["conversations"] for e in sources])
-   
+        # try:
         data_dict = preprocess_qwen_2_visual(
             chat_sources,
             self.tokenizer,
             grid_thw_image=grid_thw_merged if grid_thw_merged else None,
             grid_thw_video=video_grid_thw_merged if video_grid_thw_merged else None,
         )
+        # except:
+        #     print(f'---------preprocess qwen2 visual error----------------')
+        #     print(sources[0])
+        #     print(f'grid_thw_merged:{grid_thw_merged}')
         
         position_ids, _ = self.get_rope_index(
             self.data_args.image_processor.merge_size,

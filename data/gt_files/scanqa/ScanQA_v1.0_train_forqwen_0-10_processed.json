@@ -1,0 +1,526 @@
+[
+    {
+        "answers": [
+            "brown cabinet with tv sitting in it"
+        ],
+        "object_ids": [
+            8
+        ],
+        "object_names": [
+            "cabinet"
+        ],
+        "question": "What is in the right corner of room by curtains?",
+        "question_id": "train-scene0000-0",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is in the right corner of room by curtains?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "brown cabinet with tv sitting in it"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "light brown"
+        ],
+        "object_ids": [
+            7
+        ],
+        "object_names": [
+            "desk"
+        ],
+        "question": "What color table is on the left side of the cabinet?",
+        "question_id": "train-scene0000-1",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat color table is on the left side of the cabinet?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "light brown"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "bicycle on floor"
+        ],
+        "object_ids": [
+            57
+        ],
+        "object_names": [
+            "bicycle"
+        ],
+        "question": "What is on the left of the tv?",
+        "question_id": "train-scene0000-2",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is on the left of the tv?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "bicycle on floor"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "right of tall cabinet"
+        ],
+        "object_ids": [
+            39
+        ],
+        "object_names": [
+            "cabinet"
+        ],
+        "question": "Where is the beige wooden working table placed?",
+        "question_id": "train-scene0000-3",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhere is the beige wooden working table placed?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "right of tall cabinet"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "shower"
+        ],
+        "object_ids": [
+            4
+        ],
+        "object_names": [
+            "shower"
+        ],
+        "question": "What is in the corner of the bath?",
+        "question_id": "train-scene0000-4",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is in the corner of the bath?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "shower"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "door"
+        ],
+        "object_ids": [
+            54
+        ],
+        "object_names": [
+            "door"
+        ],
+        "question": "What is placed next to the fridge?",
+        "question_id": "train-scene0000-5",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is placed next to the fridge?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "door"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "countertop"
+        ],
+        "object_ids": [
+            3
+        ],
+        "object_names": [
+            "kitchen counter"
+        ],
+        "question": "Where is the silver bread toaster placed?",
+        "question_id": "train-scene0000-6",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhere is the silver bread toaster placed?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "countertop"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "blue"
+        ],
+        "object_ids": [
+            62
+        ],
+        "object_names": [
+            "object"
+        ],
+        "question": "What color is the plastic clothes handler?",
+        "question_id": "train-scene0000-7",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat color is the plastic clothes handler?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "blue"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "right kitchen wall"
+        ],
+        "object_ids": [
+            42
+        ],
+        "object_names": [
+            "cabinet"
+        ],
+        "question": "On what part of the cabinet is the beige cabinet placed?",
+        "question_id": "train-scene0000-8",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nOn what part of the cabinet is the beige cabinet placed?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "right kitchen wall"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "brown wooden cabinet and television"
+        ],
+        "object_ids": [
+            8,
+            15,
+            56
+        ],
+        "object_names": [
+            "cabinet",
+            "tv",
+            "shelf"
+        ],
+        "question": "The beige wooden bookshelf is placed next to what else?",
+        "question_id": "train-scene0000-9",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nThe beige wooden bookshelf is placed next to what else?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "brown wooden cabinet and television"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "2 small white trash cans"
+        ],
+        "object_ids": [
+            12,
+            13
+        ],
+        "object_names": [
+            "trash can",
+            "trash can"
+        ],
+        "question": "How many trash cans can be seen on your right when you enter?",
+        "question_id": "train-scene0000-10",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nHow many trash cans can be seen on your right when you enter?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "2 small white trash cans"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "to right of brown wooden cabinet and television up against wall near windows"
+        ],
+        "object_ids": [
+            8,
+            15,
+            56
+        ],
+        "object_names": [
+            "cabinet",
+            "tv",
+            "shelf"
+        ],
+        "question": "Where is the large wooden bookshelf placed?",
+        "question_id": "train-scene0000-11",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhere is the large wooden bookshelf placed?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "to right of brown wooden cabinet and television up against wall near windows"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "kitchen door"
+        ],
+        "object_ids": [
+            54
+        ],
+        "object_names": [
+            "door"
+        ],
+        "question": "What is the white wooden door?",
+        "question_id": "train-scene0000-12",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is the white wooden door?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "kitchen door"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "above kitchen counter tops"
+        ],
+        "object_ids": [
+            43
+        ],
+        "object_names": [
+            "kitchen cabinets"
+        ],
+        "question": "Where is the brown wooden cabinet located?",
+        "question_id": "train-scene0000-13",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhere is the brown wooden cabinet located?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "above kitchen counter tops"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "microwave oven"
+        ],
+        "object_ids": [
+            52
+        ],
+        "object_names": [
+            "microwave"
+        ],
+        "question": "What is placed next to the fridge on the upper side of the cabinets?",
+        "question_id": "train-scene0000-14",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is placed next to the fridge on the upper side of the cabinets?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "microwave oven"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "right side"
+        ],
+        "object_ids": [
+            43
+        ],
+        "object_names": [
+            "kitchen cabinets"
+        ],
+        "question": "On what side of the cabinets is the microwave located?",
+        "question_id": "train-scene0000-15",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nOn what side of the cabinets is the microwave located?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "right side"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "gray"
+        ],
+        "object_ids": [
+            34
+        ],
+        "object_names": [
+            "coffee table"
+        ],
+        "question": "What color is the coffee table in front of a couch?",
+        "question_id": "train-scene0000-16",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat color is the coffee table in front of a couch?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "gray"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "couch"
+        ],
+        "object_ids": [
+            32
+        ],
+        "object_names": [
+            "couch"
+        ],
+        "question": "What is the coffee table in front of?",
+        "question_id": "train-scene0000-17",
+        "scene_id": "scene0000_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is the coffee table in front of?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "couch"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "2"
+        ],
+        "object_ids": [
+            6
+        ],
+        "object_names": [
+            "coffee table"
+        ],
+        "question": "How many coffee tables does the brown armchair face?",
+        "question_id": "train-scene0001-0",
+        "scene_id": "scene0001_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nHow many coffee tables does the brown armchair face?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "2"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "wooden"
+        ],
+        "object_ids": [
+            3,
+            4,
+            5,
+            6,
+            7
+        ],
+        "object_names": [
+            "table",
+            "table",
+            "table",
+            "coffee table",
+            "coffee table"
+        ],
+        "question": "What kind of table is in the house?",
+        "question_id": "train-scene0001-1",
+        "scene_id": "scene0001_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat kind of table is in the house?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "wooden"
+            }
+        ]
+    },
+    {
+        "answers": [
+            "doorframe"
+        ],
+        "object_ids": [
+            19,
+            20
+        ],
+        "object_names": [
+            "door",
+            "doorframe"
+        ],
+        "question": "What is to the right of the picture?",
+        "question_id": "train-scene0001-2",
+        "scene_id": "scene0001_00",
+        "conversations": [
+            {
+                "from": "human",
+                "value": "<image>\n<image>\n<image>\n<image>\n<image>\nWhat is to the right of the picture?\nAnswer the question using a single word or phrase."
+            },
+            {
+                "from": "gpt",
+                "value": "doorframe"
+            }
+        ]
+    }
+]
