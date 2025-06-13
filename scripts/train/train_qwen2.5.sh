@@ -38,6 +38,8 @@ python hbllava/train/train_qwen.py \
     --per_device_eval_batch_size $((batch_size*2)) \
     --num_train_epochs 1.0 \
     --learning_rate ${lr} \
+    --model_max_length 8192 \
     --gradient_accumulation_steps ${grad_accum_steps} \
+    --run_name ${run_name} \
     --fp16 True \
-      # --bf16 True \
+      # --bf16 True \#A100请选用bf16，禁用fp16
