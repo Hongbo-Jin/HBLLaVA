@@ -16,13 +16,13 @@ print(data_info[0])
 result=[]
 
 for idx,sample in enumerate(data_info):
-    if idx>20 :
+    if idx>30 :
         break
     
     sample['conversations']=[
         {
             'from':"human",
-            "value":"<image>\n"+sample['question']+'\nAnswer the question using a single word or phrase.'
+            "value":sample['question']+'\nAnswer the question using a single word or phrase.'
         },
         {
             "from":"gpt",
@@ -33,5 +33,5 @@ for idx,sample in enumerate(data_info):
     result.append(sample)
     
 print(len(result))
-with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_0-10.json','w') as file:
+with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_demo.json','w') as file:
     json.dump(result,file,indent=4)

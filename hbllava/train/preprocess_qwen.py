@@ -8,9 +8,8 @@ def process(args):
     
     results=[]
     for sample in data:
-        
         tmp_conv=sample['conversations'][0]['value']
-        tmp_conv="<image>\n"*(args.num_frame-1)+tmp_conv
+        tmp_conv="<image>\n"*args.num_frame+tmp_conv
         sample['conversations'][0]['value']=tmp_conv
         results.append(sample)
 
