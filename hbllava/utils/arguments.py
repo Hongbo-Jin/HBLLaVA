@@ -68,6 +68,8 @@ class TrainingArguments(transformers.TrainingArguments):
     output_dir: str = field(default='./output')
     training_recipe: str = field(default='common')
     flash_attn: bool = field(default=False)
+    # per_device_train_batch_size: int =field(default=1)
+    # per_device_eval_batch_size : int =field(default=1)
     
     # tune_type_llm: str = field(default="frozen") # support only: frozen, full, lora, qlora_int4, qlora_int8
     # tune_type_vision_tower: str = field(default="frozen") # support only: frozen, full, partially-tune

@@ -1,11 +1,12 @@
 
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 
-NUM_frame=5
+NUM_frame=12
 model_name='Qwen2.5-VL-3B-Instruct'
 output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_scannet"
-gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_demo.json"
+gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_part1.json"
 gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/tmp_processed.json"
+batch_size=1
 
 python hbllava/train/preprocess_qwen.py \
     --gt-file ${gt_file} \
@@ -28,5 +29,8 @@ python hbllava/train/train_qwen.py \
     --output_dir ${output_dir} \
     --model_type "qwen2.5vl" \
     --downsample True \
-    --downsample_rate 5 \
+    --downsample_rate 3 \
     --flash_attn False \
+    --per_device_train_batch_size ${batch_size} \
+    --per_device_eval_batch_size $((batch_size*2)) \
+    --num_train_epochs 1.0 \
