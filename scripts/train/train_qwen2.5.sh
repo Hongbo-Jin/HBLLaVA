@@ -12,6 +12,9 @@ lr=2e-7
 batch_size=1
 grad_accum_steps=4
 
+# Output configuration
+run_name="qwen2.5vl-baseline"
+
 python hbllava/train/preprocess_qwen.py \
     --gt-file ${gt_file} \
     --num-frame ${NUM_frame} \
