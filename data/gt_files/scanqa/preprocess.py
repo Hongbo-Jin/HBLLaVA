@@ -16,7 +16,7 @@ print(data_info[0])
 result=[]
 
 for idx,sample in enumerate(data_info):
-    if idx>150 :
+    if idx>3000 :
         break
     
     sample['conversations']=[
