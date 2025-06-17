@@ -9,8 +9,8 @@ gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/tmp
 
 # Training hyperparameters
 lr=2e-7
-batch_size=1
-grad_accum_steps=4
+batch_size=1 #可根据显存适当调整
+grad_accum_steps=4 
 
 # Output configuration
 run_name="qwen2.5vl-baseline"
