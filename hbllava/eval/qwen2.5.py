@@ -7,13 +7,13 @@ from tqdm import tqdm
 import argparse
 from hbllava.utils import get_jpg_files_os
 
-def downsample_frames(frames: list,factor=0.5):
+def downsample_frames(frames: list,factor=2.0):
     
     results=[]
     for frame in frames[0]:
         width, height = frame.size
-        new_width = int(width * factor)
-        new_height = int(height * factor)
+        new_width = int(width // factor)
+        new_height = int(height // factor)
         resized_img = frame.resize((new_width, new_height))
         results.append(resized_img)
         
@@ -60,9 +60,10 @@ def eval(args):
             messages, tokenize=False, add_generation_prompt=True
         )
         # print(text)
+        # exit(0)
         image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
-        video_inputs=downsample_frames(frames=video_inputs,factor=0.5)
+        video_inputs=downsample_frames(frames=video_inputs,factor=args.downsample_factor)
         
         inputs = processor(
             text=[text],
@@ -100,6 +101,7 @@ if __name__=="__main__":
     parser.add_argument("--gt-file", type=str)
     parser.add_argument("--data-folder", type=str)
     parser.add_argument("--answer-file", type=str)
+    parser.add_argument("--downsample-factor", type=int)
 
     args = parser.parse_args()
     eval(args)

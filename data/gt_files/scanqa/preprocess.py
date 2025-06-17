@@ -16,8 +16,8 @@ print(data_info[0])
 result=[]
 
 for idx,sample in enumerate(data_info):
-    if idx>3000 :
-        break
+    # if idx>7000 :
+    #     break
     
     sample['conversations']=[
         {
@@ -33,5 +33,5 @@ for idx,sample in enumerate(data_info):
     result.append(sample)
     
 print(len(result))
-with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_part1.json','w') as file:
+with open('/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_all.json','w') as file:
     json.dump(result,file,indent=4)

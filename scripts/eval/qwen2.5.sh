@@ -1,5 +1,5 @@
 
-NUM_frame=20
+NUM_frame=8
 model_name='Qwen2.5-VL-3B-Instruct_scannet'
 
 python hbllava/eval/qwen2.5.py \
@@ -7,4 +7,5 @@ python hbllava/eval/qwen2.5.py \
     --num-frame ${NUM_frame} \
     --gt-file /mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scannet/scanqa_temp_gt.json  \
     --data-folder /mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images/ \
-    --answer-file /mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/${NUM_frame}_${model_name}_scanqa.json
+    --answer-file /mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/${NUM_frame}_${model_name}_scanqa.json \
+    --downsample-factor 2 \

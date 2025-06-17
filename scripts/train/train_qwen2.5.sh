@@ -1,10 +1,10 @@
 
-export CUDA_VISIBLE_DEVICES=0,1,2,3
+export CUDA_VISIBLE_DEVICES=0,1,2
 
-NUM_frame=14
+NUM_frame=12
 model_name='Qwen2.5-VL-3B-Instruct'
-output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_scannet"
-gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_part1.json"
+output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_scannet_${NUM_frame}"
+gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_all.json"
 gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/tmp_processed.json"
 
 # Training hyperparameters
