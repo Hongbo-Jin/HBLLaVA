@@ -44,5 +44,7 @@ python hbllava/train/train_qwen.py \
     --model_max_length 8192 \
     --gradient_accumulation_steps ${grad_accum_steps} \
     --run_name ${run_name} \
+    --save_strategy "steps" \
+    --save_steps 1000 \
     --fp16 True \
       # --bf16 True \#A100请选用bf16，禁用fp16

@@ -76,6 +76,8 @@ def preprocess_qwen_2_visual(
         )
         target += [IGNORE_INDEX] * len(input_id)
         
+        print(f'debug---------:{source}')
+        
         for conv in source:
         
             try:
