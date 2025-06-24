@@ -2,10 +2,12 @@
 export CUDA_VISIBLE_DEVICES=0,1,2
 
 NUM_frame=12
-model_name='Qwen2.5-VL-3B-Instruct'
-output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_scannet_${NUM_frame}"
-gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/ScanQA_v1.0_train_forqwen_all.json"
-gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/scanqa/tmp_processed.json"
+model_name='Qwen2.5-VL-3B-Instruct-scannet-sqa3d'
+output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_${NUM_frame}"
+gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/sqa3d/sqa3d_train_forqwen_all.json"
+gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/sqa3d/tmp_processed.json"
+data_folder="/mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images/"
+
 
 # Training hyperparameters
 lr=2e-7
@@ -13,7 +15,7 @@ batch_size=1 #可根据显存适当调整
 grad_accum_steps=4 
 
 # Output configuration
-run_name="qwen2.5vl-baseline"
+run_name="qwen2.5vl-sft"
 
 python hbllava/train/preprocess_qwen.py \
     --gt-file ${gt_file} \
@@ -22,9 +24,9 @@ python hbllava/train/preprocess_qwen.py \
 
 
 python hbllava/train/train_qwen.py \
-    --model_name_or_path /mnt/cloud_disk/public_data/Qwen2.5-VL-3B-Instruct \
+    --model_name_or_path /mnt/cloud_disk/jhb/binjiang/ckpts/Qwen2.5-VL-3B-Instruct_scannet_12 \
     --data_path   ${gt_file_processed}\
-    --data_folder /mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images/ \
+    --data_folder  ${data_folder}\
     --cache_dir /mnt/cloud_disk/jhb/binjiang/HBLLaVA/cache \
     --gradient_checkpointing True \
     --tune_mm_vision False \
