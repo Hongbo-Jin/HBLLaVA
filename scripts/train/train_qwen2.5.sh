@@ -1,9 +1,9 @@
 
-export CUDA_VISIBLE_DEVICES=0,1,2
+export CUDA_VISIBLE_DEVICES=1,2,3
 
 NUM_frame=12
 model_name='Qwen2.5-VL-3B-Instruct-scannet-sqa3d'
-output_dir="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/ckpts/${model_name}_${NUM_frame}"
+output_dir="/mnt/cloud_disk/jhb/binjiang/ckpts/${model_name}_${NUM_frame}"
 gt_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/sqa3d/sqa3d_train_forqwen_all.json"
 gt_file_processed="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/sqa3d/tmp_processed.json"
 data_folder="/mnt/cloud_disk/public_data/ScanNet_for_ScanQA_SQA3D/downsample_32_w_3d_features/posed_images/"
