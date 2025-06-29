@@ -1,7 +1,7 @@
 
 NUM_frame=8
 model_name='Qwen2.5-VL-3B-Instruct'
-model_path="/mnt/cloud_disk/jhb/binjiang/ckpts/Qwen2.5-VL-3B-Instruct-scannet-sqa3d_12"
+model_path="/mnt/cloud_disk/public_ckpts/Qwen2.5-VL-3B-Instruct"
 
 python hbllava/eval/eval_SpatialReason.py \
     --model-path ${model_path} \

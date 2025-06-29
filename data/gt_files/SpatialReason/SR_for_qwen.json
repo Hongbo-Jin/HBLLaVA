@@ -1933,21 +1933,6 @@
         "answer_id": "A"
     },
     {
-        "scene_id": "scene0636_00",
-        "question": "Having moved through the stairs, the toy piano, the container and the object, while standing between the toy piano and the container and considering the direction from the stairs to the toy piano as forward, which object is located to my left?\nOptions: (A) object. (B) box. (C) object. (D) object. (E) floor. ",
-        "question_id": "129",
-        "options": [
-            "object",
-            "box",
-            "object",
-            "object",
-            "floor"
-        ],
-        "question_type": "local_spatial",
-        "answer": "box",
-        "answer_id": "B"
-    },
-    {
         "scene_id": "scene0235_00",
         "question": "If you were standing next to the table and first looked at the picture hanging behind it, then moved your gaze down to the door beneath that picture, and finally turned your attention to the TV to the right of the door, what object would you see to the right of the TV?\nOptions: (A) dresser. (B) door. (C) laptop. (D) backpack. (E) trash can. ",
         "question_id": "130",

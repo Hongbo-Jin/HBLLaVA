@@ -3,7 +3,7 @@ import json
 pred_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/eval_results/SpatialReason/8_Qwen2.5-VL-3B-Instruct_.json"
 
 preds = [json.loads(q) for q in open(pred_file, "r")]
-    
+
 print(preds[0])
 
 acc1=0
