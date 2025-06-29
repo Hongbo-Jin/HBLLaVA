@@ -87,7 +87,9 @@ def eval(args):
                                    "question_id":qa_sample['question_id'],
                                    "question": question,
                                    "answer":qa_sample['answer'],
+                                   "answer_id":qa_sample['answer_id'],
                                    "pred_answer": output_text,
+                                   "options":qa_sample['options'],
                                    "metadata": {}}) + "\n")
         ans_file.flush()
     ans_file.close()
