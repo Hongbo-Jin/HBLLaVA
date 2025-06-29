@@ -2368,21 +2368,6 @@
         "answer_id": "C"
     },
     {
-        "scene_id": "scene0531_00",
-        "question": "Starting with the book, I notice a book to its left, then a wall beneath that book, and a stool near the wall. What object is positioned above the stool?\nOptions: (A) book. (B) wall. (C) lamp base. (D) blanket. (E) floor. ",
-        "question_id": "159",
-        "options": [
-            "book",
-            "wall",
-            "lamp base",
-            "blanket",
-            "floor"
-        ],
-        "question_type": "holistic_spatial",
-        "answer": "blanket",
-        "answer_id": "D"
-    },
-    {
         "scene_id": "scene0492_00",
         "question": "Within this 3D environment containing the toilet seat cover dispenser, the bathroom stall door, the wall, the bathroom stall and the bar, when I'm standing at the bar and orient myself so that bathroom stall door to wall is forward, what object would appear to my left?\nOptions: (A) wall. (B) bar. (C) wall. (D) sink. (E) bathroom counter. ",
         "question_id": "160",

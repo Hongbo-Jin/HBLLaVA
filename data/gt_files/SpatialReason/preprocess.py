@@ -10,6 +10,9 @@ print(data_infos[0])
 
 answer_data=[]
 
+local_data=[]
+whole_data=[]
+
 for idx,sample in enumerate(data_infos):
 
     answer=sample['answers'][0]
@@ -18,20 +21,31 @@ for idx,sample in enumerate(data_infos):
         {"from":"human","value":"<image>\n"+sample["question"]+"\nOnly select the best answer."},
         {"from":"gpt","value":answer_id}
     ]
-    
-    answer_data.append(
-        {
+    if sample['question_type']=="local_spatial":
+        local_data.append({
             "scene_id":sample['scene_id'],
             "question":sample['question'],
             "question_id":str(idx),
             "options":sample['options'],
-            "question_type":sample['question_type'],
             "answer":answer,
             "answer_id":answer_id,
-            # "conversations":conversation
-        }
-    )
+            "question_type":"local_spatial"
+        })
+    else:
+        whole_data.append(
+            {
+                "scene_id":sample['scene_id'],
+                "question":sample['question'],
+                "question_id":str(idx),
+                "options":sample['options'],
+                "answer":answer,
+                "answer_id":answer_id,
+                "question_type":"holistic_spatial"
+            })
     
 
-with open(output_path,'w') as file:
-    json.dump(answer_data,file,indent=4)
+with open("/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/SpatialReason/local_spatial.json",'w') as file:
+    json.dump(local_data,file,indent=4)
+    
+with open("/mnt/cloud_disk/jhb/binjiang/HBLLaVA/data/gt_files/SpatialReason/holistic_spatial.json",'w') as file:
+    json.dump(whole_data,file,indent=4)
