@@ -15,7 +15,7 @@ for idx,sample in enumerate(data_infos):
     answer=sample['answers'][0]
     answer_id=sample['answers'][1].replace('Answer: ','').replace('.','')
     conversation=[
-        {"from":"human","value":"<image>\n"+sample["question"]+"\nOnly output the final option letter."},
+        {"from":"human","value":"<image>\n"+sample["question"]+"\nOnly select the best answer."},
         {"from":"gpt","value":answer_id}
     ]
     
