@@ -1,4 +1,4 @@
-<h2 align="center">SpatialReasoner: The first universal 3D reasoning framework
+<h2 align="center">SpatialReason: Enhancing Spatial Multi-Hop QA with Deep Reasoning Ability
 </a>
 
 <h5 align="center">
