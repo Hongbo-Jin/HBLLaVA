@@ -8,8 +8,7 @@
 [Tinghong Ye]()<sup>*</sup>,
 [Yaochen Liu]()<sup></sup>,
 [Bo Tang]()<sup></sup>,
-[Jin Wang]()<sup></sup>, 
-[Binye Liu](https://github.com/Xjtulby)<sup></sup>,
+[Xinhua Wang]()<sup></sup>,
 [Ge Li](https://openreview.net/profile?id=~Ge_Li2)<sup>✉</sup>
 
 <sup></sup>School of Electronic and Computer Engineering, Peking University<br>
