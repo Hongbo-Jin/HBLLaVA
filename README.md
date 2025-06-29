@@ -14,8 +14,7 @@
 <sup></sup>School of Electronic and Computer Engineering, Peking University<br>
 
 </div>
-
-![网页图标](./images/PKU_logo.webp)
+<img src="./images/PKU_logo.webp" alt="描述" width="200" height="200" />
 
 ## 📰 News
 
