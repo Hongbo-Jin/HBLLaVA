@@ -7,7 +7,7 @@ from tqdm import tqdm
 import argparse
 from hbllava.utils import get_jpg_files_os
 
-def downsample_frames(frames: list,factor=2.0):
+def downsample_frames(frames: list,factor=2):
     
     results=[]
     for frame in frames[0]:
@@ -21,7 +21,6 @@ def downsample_frames(frames: list,factor=2.0):
 
 def eval(args):
     
-    fewshot_template="<Question>: The kitchen counter is located to the left of what? <Answer>: refrigerator \n<Question>: On what side of the red door is the refrigerator located? <Answer>: left \n<Question>: What color is the chair? <Answer>: brown"
     qa_data=[]
     with open(args.gt_file,'r') as file:
         qa_data=json.load(file)
@@ -38,7 +37,7 @@ def eval(args):
     )
     
     for qa_sample in tqdm(qa_data):
-        question=qa_sample['question']+" Answer the question using one word or one phrase."
+        question=qa_sample['question']+"\nOnly select the best option."
         
         scene_path=args.data_folder+qa_sample['scene_id']
         scene_images_path=get_jpg_files_os(scene_path)[0:args.num_frame]
@@ -60,7 +59,6 @@ def eval(args):
             messages, tokenize=False, add_generation_prompt=True
         )
         # print(text)
-        # exit(0)
         image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
         video_inputs=downsample_frames(frames=video_inputs,factor=args.downsample_factor)

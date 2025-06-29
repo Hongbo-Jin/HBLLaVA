@@ -28,7 +28,7 @@ for idx,sample in enumerate(data_infos):
             "question_type":sample['question_type'],
             "answer":answer,
             "answer_id":answer_id,
-            "conversations":conversation
+            # "conversations":conversation
         }
     )
     
