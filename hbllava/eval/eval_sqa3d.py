@@ -61,7 +61,7 @@ def eval(args):
         # print(text)
         image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
-        video_inputs=downsample_frames(frames=video_inputs,factor=0.5)
+        video_inputs=downsample_frames(frames=video_inputs,factor=args.downsample_factor)
         
         inputs = processor(
             text=[text],

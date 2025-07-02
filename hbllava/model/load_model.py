@@ -3,6 +3,7 @@ import torch
 from collections import OrderedDict
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, BitsAndBytesConfig, \
                             Qwen2_5_VLForConditionalGeneration, AutoProcessor
+                            # Qwen2_5OmniForConditionalGeneration,Qwen2_5OmniProcessor
 
 from .modeling_hbllava import HBLlavaForConditionalGeneration
 from .configuration_hbllava import HBLlavaConfig
@@ -22,6 +23,7 @@ def load_pretrained_model(model_name_or_path,
                           torch_dtype="auto",
                           load_8bit=False,
                           load_4bit=False,
+                          attn_implementation=None,
                           **kwargs):
     if load_8bit:
         kwargs['load_in_8bit'] = True
@@ -36,16 +38,36 @@ def load_pretrained_model(model_name_or_path,
     # else:
     #     kwargs['torch_dtype'] = torch.float16
         
-    if "qwen2.5-vl" in model_name_or_path.lower():
-        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-        model_name_or_path, 
-        torch_dtype=torch_dtype,
-        device_map=device_map,
-        **kwargs)
-        print('loading qwen2.5-vl')
-        processor= AutoProcessor.from_pretrained(model_name_or_path)
+    if "qwen2.5" in model_name_or_path.lower():
+        if "vl" in model_name_or_path.lower():
+            model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+            model_name_or_path, 
+            torch_dtype=torch_dtype,
+            device_map=device_map,
+            **kwargs)
+            print('loading qwen2.5-vl')
+            processor= AutoProcessor.from_pretrained(model_name_or_path)
+            return model, processor
+        elif "omni" in model_name_or_path.lower():
+            model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
+            model_name_or_path,
+            torch_dtype="auto",
+            device_map="auto",
+            # attn_implementation="flash_attention_2",
+            )
+            processor = Qwen2_5OmniProcessor.from_pretrained(model_name_or_path)
+            
+            return model, processor
+            
+            
+    # elif "llava" in model_name_or_path.lower():
+    #     print(f"Loaded LLaVA model: {model_name_or_path}")
+    #     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+    #     if "qwen" in model_name_or_path.lower():
+    #         model = AutoModelForCausalLM.from_pretrained(model_name_or_path, low_cpu_mem_usage=True, attn_implementation=attn_implementation, **kwargs)
+    #         print(f'llava-qwen model loaded')
 
-        return model, processor
+    #     return model, processor
     
     context_len = getattr(model.config, 'max_sequence_length', 2048)
     tokenizer = model.tokenizer

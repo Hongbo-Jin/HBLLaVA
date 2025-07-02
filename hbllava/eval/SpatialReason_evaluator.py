@@ -1,6 +1,6 @@
 import json
 
-pred_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/eval_results/SpatialReason/8_Qwen2.5-VL-3B-Instruct_all.json"
+pred_file="/mnt/cloud_disk/jhb/binjiang/HBLLaVA/output/eval_results/SpatialReason/8_Qwen2.5-VL-3B-Instruct.json"
 
 preds = [json.loads(q) for q in open(pred_file, "r")]
 
@@ -39,8 +39,9 @@ for sample in preds_list[0]:
 print(acc1)
 print(acc2)
 print(acc3)
+total_acc1=acc1+acc2+acc3
 print(f'type1 total samples:{len(preds_list[0])}')
-print(f'type1 total accuracy:{(acc1+acc2+acc3)/len(preds_list[0])}')
+print(f'type1 total accuracy:{total_acc1/len(preds_list[0])}')
 
 for sample in preds_list[1]:
     pred=sample['pred_answer'][0]
@@ -61,3 +62,7 @@ print(acc2)
 print(acc3)
 print(f'type2 total samples:{len(preds_list[1])}')
 print(f'type2 total accuracy:{(acc1+acc2+acc3)/len(preds_list[1])}')
+
+total_acc2=acc1+acc2+acc3
+
+print(f'total accuracy:{(total_acc1+total_acc2)/(len(preds_list[0])+len(preds_list[1]))}')

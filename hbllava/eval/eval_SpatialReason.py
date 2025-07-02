@@ -36,6 +36,9 @@ def eval(args):
         load_4bit=False
     )
     
+    
+    exit(0)
+    
     for qa_sample in tqdm(qa_data):
         question=qa_sample['question']+"\nOnly select the best option."
         
